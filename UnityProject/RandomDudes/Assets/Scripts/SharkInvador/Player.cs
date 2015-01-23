@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
 
             //reset everything back to normal
             blinkCount = 0;
-            powerLive = 100;
+            //powerLive = 100;
             state = State.Playing;
         }
         //if player ran out of lives
@@ -218,9 +218,9 @@ public class Player : MonoBehaviour
 
 
         //convert power to a int
-        int iPowerLive = (int)Player.powerLive;
+       // int iPowerLive = (int)Player.powerLive;
         //Display shield power selected
-        GUI.Label(new Rect(10, 170, 200, 20), "Energy: " + iPowerLive.ToString());
+        //GUI.Label(new Rect(10, 170, 200, 20), "Energy: " + iPowerLive.ToString());
 
 
         //Display the ammo of the selected weapon
