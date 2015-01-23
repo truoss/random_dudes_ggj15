@@ -1,15 +1,20 @@
 ﻿using UnityEngine;
+using SharkInvador;
 using System.Collections;
 
-public class KillParticleSystem : MonoBehaviour
+
+namespace SharkInvador
 {
-
-
-    // Update is called once per frame
-    void Update()
+    public class KillParticleSystem : MonoBehaviour
     {
-        //destroy particle
-        if (!particleSystem.IsAlive())
-            Destroy(gameObject);
+
+
+        // Update is called once per frame
+        void Update()
+        {
+            //destroy particle
+            if (!particleSystem.IsAlive())
+                Destroy(gameObject);
+        }
     }
 }
