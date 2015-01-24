@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
+/*
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+ */ 
 using System.Collections;
 using System.Collections.Generic;
 
@@ -145,9 +147,11 @@ namespace SharkPac
                 }
             }
 
+            /*
 #if UNITY_EDITOR
             if (EditorApplication.isPlaying)
-#endif            
+#endif        
+             */ 
                 GameLogic.I.StartCoroutine(GameLogic.I.Wait(1, GameLogic.GameState.PLAYING));            
         }
 
@@ -187,6 +191,7 @@ namespace SharkPac
             var _tmp = obstacles.ToArray();
             for (int i = 0; i < obstacles.Count; i++)
             {
+                /*
 #if UNITY_EDITOR
                 if (EditorApplication.isPlaying)
                     Destroy(_tmp[i].gameObject);
@@ -195,6 +200,8 @@ namespace SharkPac
 #else
                 Destroy(_tmp[i].gameObject);
 #endif
+                 */
+                Destroy(_tmp[i].gameObject);
             }
 
             obstacles.Clear();
