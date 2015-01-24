@@ -1,0 +1,131 @@
+fileFormatVersion: 2
+guid: 7e819a5a8ecde4d4ba009a27885379a2
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: flappyshark_sheet_0
+    21300002: flappyshark_sheet_1
+    21300004: flappyshark_sheet_2
+    21300006: flappyshark_sheet_3
+    21300008: flappyshark_sheet_4
+    21300010: flappyshark_sheet_5
+    21300012: flappyshark_sheet_6
+    21300014: flappyshark_sheet_7
+    21300016: flappyshark_sheet_8
+    21300018: flappyshark_sheet_9
+    21300020: flappyshark_sheet_10
+    21300022: flappyshark_sheet_11
+    21300024: flappyshark_sheet_12
+    21300026: flappyshark_sheet_13
+    21300028: flappyshark_sheet_14
+    21300030: flappyshark_sheet_15
+    21300032: flappyshark_sheet_16
+    21300034: flappyshark_sheet_17
+    21300036: flappyshark_sheet_18
+    21300038: flappyshark_sheet_19
+    21300040: flappyshark_sheet_20
+    21300042: flappyshark_sheet_21
+    21300044: flappyshark_sheet_22
+    21300046: flappyshark_sheet_23
+    21300048: flappyshark_sheet_24
+    21300050: flappyshark_sheet_25
+    21300052: flappyshark_sheet_26
+    21300054: flappyshark_sheet_27
+    21300056: flappyshark_sheet_28
+    21300058: flappyshark_sheet_29
+    21300060: flappyshark_sheet_30
+    21300062: flappyshark_sheet_31
+    21300064: flappyshark_sheet_32
+    21300066: flappyshark_sheet_33
+    21300068: flappyshark_sheet_34
+    21300070: flappyshark_sheet_35
+    21300072: flappyshark_sheet_36
+    21300074: flappyshark_sheet_37
+    21300076: flappyshark_sheet_38
+    21300078: flappyshark_sheet_39
+    21300080: flappyshark_sheet_40
+    21300082: flappyshark_sheet_41
+    21300084: flappyshark_sheet_42
+    21300086: flappyshark_sheet_43
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 250
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: flappyshark_sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1012
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: flappyshark_sheet_1
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 0
+        width: 1012
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: flappyshark_sheet_2
+      rect:
+        serializedVersion: 2
+        x: 2024
+        y: 0
+        width: 1012
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: flappyshark_sheet_3
+      rect:
+        serializedVersion: 2
+        x: 3036
+        y: 0
+        width: 1012
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

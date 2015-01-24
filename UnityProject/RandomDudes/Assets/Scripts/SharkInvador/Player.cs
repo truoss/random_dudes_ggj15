@@ -40,6 +40,8 @@ namespace SharkInvador
 
         private bool first = true;
         private bool second = true;
+        private float fire1Time = 2f;
+        private float fire2Time = 2f;
 
         #endregion
 
@@ -124,6 +126,8 @@ namespace SharkInvador
         void Update()
         {
             time -= Time.deltaTime ;
+            fire1Time += Time.deltaTime;
+            fire2Time += Time.deltaTime;
 
             if (time < 40 && first)
             {
@@ -136,18 +140,18 @@ namespace SharkInvador
                 Instantiate(EnemyPrefab);
                 second = false;
             }
-            if (time < 0)
-            {
-                lives = 0;
-                lives2 = 0;
-                StartCoroutine("DestroyShip");
-            }
+            
 
 
             //only let player do something if he did not explode
             if (state != State.Explosion)
             {
-
+                if (time < 0)
+                {
+                    lives = 0;
+                    lives2 = 0;
+                    StartCoroutine("DestroyShip");
+                }
 
                 float amtToMoveV = 0;
                 float amtToMoveH = 0;
@@ -157,54 +161,31 @@ namespace SharkInvador
                 {
                     // moves the player horizontaly
 
-                    if (Input.GetKey(KeyCode.A))
-                    {
-                        amtToMoveH = -1 * playerSpeed * Time.deltaTime;
-                    }
-                    if (Input.GetKey(KeyCode.D))
-                    {
-                        amtToMoveH = 1 * playerSpeed * Time.deltaTime;
-                    }
+                    
+                    amtToMoveH = Input.GetAxis("Horizontal") * playerSpeed * Time.deltaTime;
+                    
+                    
                     transform.Translate(Vector3.right * amtToMoveH, Space.World);
 
                     //moves the player verticaly
 
-                    if (Input.GetKey(KeyCode.S))
-                    {
-                        amtToMoveV = -1 * playerSpeed * Time.deltaTime;
-                    }
-                    if (Input.GetKey(KeyCode.W))
-                    {
-                        amtToMoveV = 1 * playerSpeed * Time.deltaTime;
-                    }
+                    amtToMoveV = Input.GetAxis("Vertical") * playerSpeed * Time.deltaTime;
+
                     transform.Translate(Vector3.up * amtToMoveV, Space.World);
                 }
 
                 //player 2
                 if (gameObject.tag == "Player2")
                 {
-                    // moves the player horizontaly
+                    amtToMoveH = Input.GetAxis("Horizontal2") * playerSpeed * Time.deltaTime;
 
-                    if (Input.GetKey(KeyCode.LeftArrow))
-                    {
-                        amtToMoveH = -1 * playerSpeed * Time.deltaTime;
-                    }
-                    if (Input.GetKey(KeyCode.RightArrow))
-                    {
-                        amtToMoveH = 1 * playerSpeed * Time.deltaTime;
-                    }
+
                     transform.Translate(Vector3.right * amtToMoveH, Space.World);
 
                     //moves the player verticaly
 
-                    if (Input.GetKey(KeyCode.DownArrow))
-                    {
-                        amtToMoveV = -1 * playerSpeed * Time.deltaTime;
-                    }
-                    if (Input.GetKey(KeyCode.UpArrow))
-                    {
-                        amtToMoveV = 1 * playerSpeed * Time.deltaTime;
-                    }
+                    amtToMoveV = Input.GetAxis("Vertical2") * playerSpeed * Time.deltaTime;
+
                     transform.Translate(Vector3.up * amtToMoveV, Space.World);
                 }
 
@@ -233,7 +214,7 @@ namespace SharkInvador
                 //rotate player sideways when moving horizontally right
                 if (amtToMoveH > 0)
                 {
-                    Quaternion target = Quaternion.Euler(0, -30, 0);
+                    Quaternion target = Quaternion.Euler(-90, -30, 0);
                     transform.localRotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * playerSpeed);
 
                 }
@@ -241,28 +222,28 @@ namespace SharkInvador
                 //rotate player sideways when moving horizontally left
                 else if (amtToMoveH < 0)
                 {
-                    Quaternion target = Quaternion.Euler(0, 30, 0);
+                    Quaternion target = Quaternion.Euler(-90, 30, 0);
                     transform.localRotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * playerSpeed);
                 }
 
                 //rotate player sideways when moving forward
                 else if (amtToMoveV < 0)
                 {
-                    Quaternion target = Quaternion.Euler(-30, 0, 0);
+                    Quaternion target = Quaternion.Euler(-120, 0, 0);
                     transform.localRotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * playerSpeed);
                 }
 
                 //rotate player sideways when moving back
                 else if (amtToMoveV > 0)
                 {
-                    Quaternion target = Quaternion.Euler(30, 0, 0);
+                    Quaternion target = Quaternion.Euler(-60, 0, 0);
                     transform.localRotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * playerSpeed);
                 }
 
                 // else go back to normal position
                 else
                 {
-                    Quaternion target = Quaternion.Euler(0, 0, 0);
+                    Quaternion target = Quaternion.Euler(-90, 0, 0);
                     transform.localRotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * playerSpeed);
                 }
 
@@ -344,10 +325,10 @@ namespace SharkInvador
 
 
                 //Decrease the players life
-                /*if (gameObject.tag == "Player")
+                if (gameObject.tag == "Player")
                     Player.lives--;
                 if (gameObject.tag == "Player2")
-                    Player.lives2--;*/
+                    Player.lives2--;
 
                 //Set a new position and speed for the hit enemy
                 Enemy enemy = (Enemy)otherObject.gameObject.GetComponent("Enemy");
@@ -434,14 +415,16 @@ namespace SharkInvador
             {
                 // moves the player horizontaly
 
-                if (Input.GetKeyDown(KeyCode.Y) && ammoP1 > 0)
+                if (Input.GetAxis("Fire1") > 0 && ammoP1 > 0 && fire1Time > 0.5)
                 {
+                    Debug.Log(Input.GetAxis("Fire1"));
                     //determine position
                     Vector3 position = new Vector3(transform.position.x, transform.position.y + projectileOffset, transform.position.z);
                     //fire projectile
                     Instantiate(projectilePrefab, position, Quaternion.identity);
                     //subtract amunition
                     ammoP1--;
+                    fire1Time = 0;
                 }
             }
             //Player 2
@@ -449,14 +432,16 @@ namespace SharkInvador
             {
                 // moves the player horizontaly
 
-                if (Input.GetKeyDown(KeyCode.Keypad0) && ammoP2 > 0)
+                if (Input.GetAxis("Fire2") > 0 && ammoP2 > 0 && fire2Time > 0.5)
                 {
+                    Debug.Log(Input.GetAxis("Fire2"));
                     //determine position
                     Vector3 position = new Vector3(transform.position.x, transform.position.y + projectileOffset, transform.position.z);
                     //fire projectile
                     Instantiate(projectilePrefab, position, Quaternion.identity);
                     //subtract amunition
                     ammoP2--;
+                    fire2Time = 0;
                 }
             }
 
