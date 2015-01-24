@@ -12,7 +12,11 @@ public class MainUI : MonoBehaviour
     public Image RightPlayerImg;
     public CharacterState LeftPlayerCharacter;
     public CharacterState RightPlayerCharacter;
-    public Image scorePrefab;
+    public static int LeftPlayerScore = 0;
+    public static int RightPlayerScore = 0;
+    public Text LeftScoreText;
+    public Text RightScoreText;
+    //public Image scorePrefab;
     public Sprite[] leftCharacter;
     public Sprite[] rightCharacter;
     public enum CharacterState
@@ -25,6 +29,7 @@ public class MainUI : MonoBehaviour
     void Awake()
     {
         I = this;
+        UpdateScoreText();
     }
 
 
@@ -75,6 +80,27 @@ public class MainUI : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void AddLeftPlayerScore()
+    {
+        LeftPlayerScore++;
+        //var obj = Instantiate
+        //Debug.LogWarning("Left: " + LeftPlayerScore + " : Right: " + RightPlayerScore);
+        UpdateScoreText();
+    }
+
+    public void AddRightPlayerScore()
+    {
+        RightPlayerScore++;
+        //Debug.LogWarning("Left: " + LeftPlayerScore + " : Right: " + RightPlayerScore);
+        UpdateScoreText();
+    }
+
+    void UpdateScoreText()
+    {
+        LeftScoreText.text = LeftPlayerScore.ToString();
+        RightScoreText.text = RightPlayerScore.ToString();
     }
 
     public void ShowCloseWindow()

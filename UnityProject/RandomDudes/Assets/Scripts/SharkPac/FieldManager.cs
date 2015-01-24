@@ -8,8 +8,8 @@ namespace SharkPac
     public class FieldManager : MonoBehaviour
     {
         public static FieldManager I;
-        public Player RightPlayer;
-        public Player LeftPlayer;
+        public Player Shark;
+        public Player Dude;
         public Transform target;
         public Transform start;
         public Transform obstaclesParent;
@@ -112,23 +112,23 @@ namespace SharkPac
                                 SetBlock(x, y);
                                 break;
                             case Field.FieldState.PLAYER1START:
-                                SetPlayerPosition(LeftPlayer, x, y);
+                                SetPlayerPosition(Dude, x, y);
                                 SetStart(x, y);
                                 if (MainUI.I.LeftPlayerCharacter == MainUI.CharacterState.DUDE)
                                 {
-                                    LeftPlayer.isPlayer1 = true;
-                                    RightPlayer.isPlayer1 = false;
+                                    Dude.isPlayer1 = true;
+                                    Shark.isPlayer1 = false;
                                 }
                                 else
                                 {
-                                    LeftPlayer.isPlayer1 = false;
-                                    RightPlayer.isPlayer1 = true;                                    
+                                    Dude.isPlayer1 = false;
+                                    Shark.isPlayer1 = true;                                    
                                 }
-                                LeftPlayer.character = MainUI.I.LeftPlayerCharacter;
+                                //Debug.LogWarning("LeftPlayer.character: " + Dude.character.ToString());
                                 break;
                             case Field.FieldState.PLAYER2START:
-                                SetPlayerPosition(RightPlayer, x, y);
-                                RightPlayer.character = MainUI.I.RightPlayerCharacter;
+                                SetPlayerPosition(Shark, x, y);
+                                //Debug.LogWarning("RightPlayer.character: " + Shark.character.ToString());
                                 break;
                             case Field.FieldState.TARGET:
                                 SetTarget(x, y);
@@ -144,7 +144,7 @@ namespace SharkPac
             }
 
             if (EditorApplication.isPlaying)
-                GameLogic.I.StartCoroutine(GameLogic.I.Wait(3, GameLogic.GameState.PLAYING));            
+                GameLogic.I.StartCoroutine(GameLogic.I.Wait(1, GameLogic.GameState.PLAYING));            
         }
 
         private void SetStart(int x, int y)

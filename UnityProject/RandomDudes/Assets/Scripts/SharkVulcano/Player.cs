@@ -38,9 +38,9 @@ namespace SharkVulcano
         {
             //userinput
             if (isLeft)
-                hInput = -Input.GetAxisRaw("Horizontal");
-            else
                 hInput = -Input.GetAxisRaw("Horizontal2");
+            else
+                hInput = -Input.GetAxisRaw("Horizontal");
             //vInput = Input.GetAxisRaw("Vertical");
 
             if (hInput != 0)
@@ -100,7 +100,7 @@ namespace SharkVulcano
 
         void OnCollisionEnter(Collision collision)
         {
-            if (collision.transform.GetComponent<Ball>() != null)
+            if (collision.transform.GetComponent<Ball>() != null && GameLogic.I.curState == GameLogic.GameState.PLAYING)
             {
                 if (isLeft)
                     GameLogic.I.SetState(GameLogic.GameState.RIGHTWINS);

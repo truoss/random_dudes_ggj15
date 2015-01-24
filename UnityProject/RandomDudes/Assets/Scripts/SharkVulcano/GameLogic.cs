@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+using UnityEngine.Events;
 
 namespace SharkVulcano
 {
@@ -36,6 +38,7 @@ namespace SharkVulcano
                 case GameState.START:
                     if (MainUI.I)
                     {
+                        //GUI
                         MainUI.I.SetLeftCharacter(MainUI.CharacterState.DUDE);
                         MainUI.I.SetRightCharacter(MainUI.CharacterState.DUDE);
                     }
@@ -44,8 +47,16 @@ namespace SharkVulcano
                 case GameState.PLAYING:
                     break;
                 case GameState.LEFTWINS:
+                    MainUI.I.AddLeftPlayerScore();
+                    WinDialog.I.SetImageState(WinDialog.ImageState.LEFT);
+                    //SetState(GameState.START);
+                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadPac));
                     break;
                 case GameState.RIGHTWINS:
+                    MainUI.I.AddRightPlayerScore();
+                    WinDialog.I.SetImageState(WinDialog.ImageState.RIGHT);
+                    //SetState(GameState.START);
+                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadPac));
                     break;
                 default:
                     break;
@@ -58,6 +69,13 @@ namespace SharkVulcano
             yield return new WaitForSeconds(p);
 
             GameLogic.I.SetState(state);
+        }
+
+        public IEnumerator Wait(int p, UnityAction action)
+        {
+            yield return new WaitForSeconds(p);
+
+            action();
         }
     }
 }

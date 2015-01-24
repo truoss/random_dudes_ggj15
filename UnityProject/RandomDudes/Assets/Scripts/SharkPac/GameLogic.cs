@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
 
 namespace SharkPac
 {
@@ -11,8 +12,8 @@ namespace SharkPac
         {
             START,
             PLAYING,
-            SHARKWINS,
-            DUDEWINS
+            PLAYER2WINS,
+            PLAYER1WINS
         }        
 
         void Awake()
@@ -37,6 +38,7 @@ namespace SharkPac
                 case GameState.START:
                     if (MainUI.I)
                     {
+                        //GUI
                         if (Random.Range(0, 2) > 0.5)
                         {
                             MainUI.I.SetLeftCharacter(MainUI.CharacterState.DUDE);
@@ -52,11 +54,17 @@ namespace SharkPac
                     break;
                 case GameState.PLAYING:
                     break;
-                case GameState.SHARKWINS:
-                    SetState(GameState.START);
+                case GameState.PLAYER2WINS:
+                    MainUI.I.AddRightPlayerScore();
+                    WinDialog.I.SetImageState(WinDialog.ImageState.RIGHT);
+                    //SetState(GameState.START);
+                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadVulcano));
                     break;
-                case GameState.DUDEWINS:
-                    SetState(GameState.START);
+                case GameState.PLAYER1WINS:
+                    MainUI.I.AddLeftPlayerScore();
+                    WinDialog.I.SetImageState(WinDialog.ImageState.LEFT);
+                    //SetState(GameState.START);
+                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadVulcano));
                     break;
                 default:
                     break;
@@ -70,7 +78,12 @@ namespace SharkPac
             GameLogic.I.SetState(state);
         }
 
-        
+        public IEnumerator Wait(int p, UnityAction action)
+        {
+            yield return new WaitForSeconds(p);
+
+            action();
+        }
 
     }
 }

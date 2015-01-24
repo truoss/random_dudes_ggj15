@@ -29,13 +29,13 @@ namespace SharkPac
             //userinput
             if (isPlayer1)
             {
-                hInput = Input.GetAxisRaw("Horizontal");
-                vInput = Input.GetAxisRaw("Vertical");
+                hInput = Input.GetAxisRaw("Horizontal2");
+                vInput = Input.GetAxisRaw("Vertical2");
             }
             else
             {
-                hInput = Input.GetAxisRaw("Horizontal2");
-                vInput = Input.GetAxisRaw("Vertical2");
+                hInput = Input.GetAxisRaw("Horizontal");
+                vInput = Input.GetAxisRaw("Vertical");
             }
 
             if (hInput != 0)
@@ -49,12 +49,20 @@ namespace SharkPac
 
         void OnCollisionEnter2D(Collision2D collision)
         {
-            //Debug.LogWarning("blub: " + collision, collision.gameObject);
-            if (collision.transform.GetComponent<Player>() != null && character == MainUI.CharacterState.DUDE)
-            { 
-                if(collision.transform.GetComponent<Player>().character == MainUI.CharacterState.SHARK)
-                    GameLogic.I.SetState(GameLogic.GameState.SHARKWINS);
-            }                
+            if (collision.transform.GetComponent<Player>() == null)
+                return;
+            else
+            {                
+                if (collision.transform.GetComponent<Player>().character != character && character != MainUI.CharacterState.DUDE)
+                {
+                    //Debug.LogWarning(character + " : " + collision.transform.GetComponent<Player>().character);
+                    if(character == MainUI.CharacterState.SHARK && isPlayer1)
+                        GameLogic.I.SetState(GameLogic.GameState.PLAYER1WINS);
+                    else
+                        GameLogic.I.SetState(GameLogic.GameState.PLAYER2WINS);
+
+                }
+            }
         }
 
         void Update()
