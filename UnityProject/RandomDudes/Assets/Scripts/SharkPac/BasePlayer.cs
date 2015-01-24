@@ -8,7 +8,7 @@ namespace SharkPac
         public int xCoord;
         public int yCoord;
         public float speed = 5;
-        private Vector3 moveDir = Vector3.zero;
+        //private Vector3 moveDir = Vector3.zero;
         float moveY = 0;
         float moveX = 0;
         public float maxSpeed = 10;
@@ -38,7 +38,7 @@ namespace SharkPac
 
         internal void UpdateMoveDirection()
         {
-            
+            /*
             if (hInput > 0f)
                 moveDir = new Vector3(1, 0, 0);//viewDir = ViewDir.Right; //x+
             else if (hInput < 0f)
@@ -49,7 +49,7 @@ namespace SharkPac
                 moveDir = new Vector3(0, -1, 0); //y-
             else
                 moveDir = Vector3.zero;
-              
+              */
         }
 
         void CalculateAndApplyMovement()
