@@ -18,6 +18,8 @@ namespace SharkVulcano
         void Awake()
         {
             I = this;
+
+            Application.LoadLevelAdditive(0);
         }
 
         void Start()
@@ -32,6 +34,11 @@ namespace SharkVulcano
             switch (curState)
             {
                 case GameState.START:
+                    if (MainUI.I)
+                    {
+                        MainUI.I.SetLeftCharacter(MainUI.CharacterState.DUDE);
+                        MainUI.I.SetRightCharacter(MainUI.CharacterState.DUDE);
+                    }
                     Spawner.I.Init();
                     break;
                 case GameState.PLAYING:

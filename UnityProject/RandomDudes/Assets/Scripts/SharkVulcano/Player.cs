@@ -19,12 +19,16 @@ namespace SharkVulcano
         void Awake()
         {
             anim = transform.GetChild(0).GetComponent<Animator>();
+            anim.SetBool("Dead", false);
         }
 
         void Update()
         {
             if (GameLogic.I.curState != GameLogic.GameState.PLAYING)
+            {
+                anim.SetFloat("Speed", 0);
                 return;
+            }                
 
             if (!GetUserInput())
                 return;
@@ -71,8 +75,11 @@ namespace SharkVulcano
             
 
             //Animation
-            if (movement != Vector3.zero)
+            //Debug.LogWarning(hInput);
+            if (hInput > 0)
                 anim.SetFloat("Speed", 1);
+            else if (hInput < 0)
+                anim.SetFloat("Speed", -1);
             else
                 anim.SetFloat("Speed", 0);
         }
@@ -100,7 +107,8 @@ namespace SharkVulcano
                 else
                     GameLogic.I.SetState(GameLogic.GameState.LEFTWINS);
 
-                Destroy(this.gameObject);
+                //Destroy(this.gameObject);
+                anim.SetBool("Dead", true);
             }
         }
     }

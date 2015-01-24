@@ -1,0 +1,97 @@
+﻿using UnityEngine;
+using UnityEditor;
+using UnityEngine.UI;
+using System.Collections;
+
+public class MainUI : MonoBehaviour 
+{
+    public static MainUI I;
+    public RectTransform LeftPlayer;
+    public Image LeftPlayerImg;
+    public RectTransform RightPlayer;
+    public Image RightPlayerImg;
+    public CharacterState LeftPlayerCharacter;
+    public CharacterState RightPlayerCharacter;
+    public Image scorePrefab;
+    public Sprite[] leftCharacter;
+    public Sprite[] rightCharacter;
+    public enum CharacterState
+    {
+        DUDE,
+        SHARK,
+        BANANA
+    }
+
+    void Awake()
+    {
+        I = this;
+    }
+
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!ModalPanel.I.modalWindowOpen)
+                ShowCloseWindow();
+        }
+    }
+
+    public void SetLeftCharacter(CharacterState charState)
+    {
+        LeftPlayerCharacter = charState;
+
+        switch (LeftPlayerCharacter)
+        {
+            case CharacterState.DUDE:
+                LeftPlayerImg.sprite = leftCharacter[0];
+                break;
+            case CharacterState.SHARK:
+                LeftPlayerImg.sprite = leftCharacter[1];
+                break;
+            case CharacterState.BANANA:
+                LeftPlayerImg.sprite = leftCharacter[2];
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void SetRightCharacter(CharacterState charState)
+    {
+        RightPlayerCharacter = charState;
+
+        switch (RightPlayerCharacter)
+        {
+            case CharacterState.DUDE:
+                RightPlayerImg.sprite = rightCharacter[0];
+                break;
+            case CharacterState.SHARK:
+                RightPlayerImg.sprite = rightCharacter[1];
+                break;
+            case CharacterState.BANANA:
+                RightPlayerImg.sprite = rightCharacter[2];
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void ShowCloseWindow()
+    {
+        ModalPanel.I.Choice("Would you like to Quit?", Quit, Back);
+    }
+
+    void Quit()
+    {
+        if (EditorApplication.isPlaying)
+            EditorApplication.isPlaying = false;
+        else
+            Application.Quit();
+    }
+
+    void Back()
+    {
+        ModalPanel.I.modalPanelObject.SetActive(false);
+    }
+}

@@ -8,8 +8,8 @@ namespace SharkPac
     public class FieldManager : MonoBehaviour
     {
         public static FieldManager I;
-        public BasePlayer sharkPlayer;
-        public BasePlayer dudePlayer;
+        public Player RightPlayer;
+        public Player LeftPlayer;
         public Transform target;
         public Transform start;
         public Transform obstaclesParent;
@@ -112,11 +112,23 @@ namespace SharkPac
                                 SetBlock(x, y);
                                 break;
                             case Field.FieldState.PLAYER1START:
-                                SetPlayerPosition(dudePlayer, x, y);
+                                SetPlayerPosition(LeftPlayer, x, y);
                                 SetStart(x, y);
+                                if (MainUI.I.LeftPlayerCharacter == MainUI.CharacterState.DUDE)
+                                {
+                                    LeftPlayer.isPlayer1 = true;
+                                    RightPlayer.isPlayer1 = false;
+                                }
+                                else
+                                {
+                                    LeftPlayer.isPlayer1 = false;
+                                    RightPlayer.isPlayer1 = true;                                    
+                                }
+                                LeftPlayer.character = MainUI.I.LeftPlayerCharacter;
                                 break;
                             case Field.FieldState.PLAYER2START:
-                                SetPlayerPosition(sharkPlayer, x, y);
+                                SetPlayerPosition(RightPlayer, x, y);
+                                RightPlayer.character = MainUI.I.RightPlayerCharacter;
                                 break;
                             case Field.FieldState.TARGET:
                                 SetTarget(x, y);
@@ -147,7 +159,7 @@ namespace SharkPac
             target.transform.position = new Vector3(x, y, 0);
         }
 
-        public void SetPlayerPosition(BasePlayer player, int x, int y)
+        public void SetPlayerPosition(Player player, int x, int y)
         {
             //Debug.LogWarning("SetPlayerPosition: " + x + "," + y, player);
             
