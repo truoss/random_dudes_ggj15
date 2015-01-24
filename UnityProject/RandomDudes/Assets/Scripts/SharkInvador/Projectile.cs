@@ -75,6 +75,7 @@ namespace SharkInvador
                     Application.LoadLevel(3);
                 */
                 //reset the enemy
+                enemy = (Enemy)otherObject.GetComponent("Enemy");
                 Instantiate(ExplosionPrefab, enemy.transform.position, enemy.transform.rotation);
                 enemy.minSpeed += 0.01f;
                 enemy.maxSpeed += 0.1f;

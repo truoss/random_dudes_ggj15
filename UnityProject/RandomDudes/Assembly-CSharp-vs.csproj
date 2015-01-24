@@ -53,6 +53,15 @@
      <Compile Include="Assets\Scripts\SharkInvador\Player.cs" />
      <Compile Include="Assets\Scripts\SharkInvador\Projectile.cs" />
      <Compile Include="Assets\Scripts\SharkInvador\Stars.cs" />
+     <Compile Include="Assets\Scripts\SharkPac\BasePlayer.cs" />
+     <Compile Include="Assets\Scripts\SharkPac\Cliff.cs" />
+     <Compile Include="Assets\Scripts\SharkPac\Field.cs" />
+     <Compile Include="Assets\Scripts\SharkPac\FieldManager.cs" />
+     <Compile Include="Assets\Scripts\SharkPac\GameLogic.cs" />
+     <Compile Include="Assets\Scripts\SharkPac\Obstacle.cs" />
+     <Compile Include="Assets\Scripts\SharkPac\PlayerDude.cs" />
+     <Compile Include="Assets\Scripts\SharkPac\PlayerShark.cs" />
+     <Compile Include="Assets\Scripts\SharkPac\Target.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>

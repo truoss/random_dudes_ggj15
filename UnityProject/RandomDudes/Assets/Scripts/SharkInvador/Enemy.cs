@@ -21,12 +21,17 @@ namespace SharkInvador
         private float rotationZ;                //random for the z axis rotation
         private float MinRotateSpeed = 60f;     //variable for minimal rotation speed of enemy
         private float MaxRotateSpeed = 120f;    //variable for maximum rotation speed of enemy
-        private float MinScale = .8f;           //variable for the minimal scale
-        private float MaxScale = 2f;            //variable for the max scale
+        private float MinScale = 3f;           //variable for the minimal scale
+        private float MaxScale = 5f;            //variable for the max scale
         private float currentRotationSpeed;     //current rotation speed
         public static float currentScaleX;      //current scale X axis
         public static float currentScaleY;      //current scale Y axis
         public static float currentScaleZ;      //current scale Z axis
+
+        public Texture Banana1;
+        public Texture Banana2;
+        public Texture Banana3;
+        private int selection;
         #endregion
 
 
@@ -61,10 +66,10 @@ namespace SharkInvador
 
             // ScreenWrap
             // lets the enemy reapear at the other side if the screeen horizontal
-            if (transform.position.x < -9.3f)
-                transform.position = new Vector3(9.3f, transform.position.y, transform.position.z);
-            else if (transform.position.x > 9.3f)
-                transform.position = new Vector3(-9.3f, transform.position.y, transform.position.z);
+            if (transform.position.x < -9f)
+                transform.position = new Vector3(9f, transform.position.y, transform.position.z);
+            else if (transform.position.x > 9f)
+                transform.position = new Vector3(-9f, transform.position.y, transform.position.z);
 
         }
 
@@ -77,14 +82,31 @@ namespace SharkInvador
         //function to inizialize the positon and speed
         public void SetPositionAndSpeed()
         {
+            selection = Random.Range(0, 3);
+            switch (selection)
+            {
+                case (0):
+                    renderer.material.mainTexture = Banana1;
+                    break;
+
+                case (1):
+                    renderer.material.mainTexture = Banana2;
+                    break;
+
+                case (2):
+                    renderer.material.mainTexture = Banana3;
+                    break;
+            }
+
             //get randoms for scale and rotation
             currentRotationSpeed = Random.Range(MinRotateSpeed, MaxRotateSpeed);
-            rotationX = Random.Range(-2f, 2f);
-            rotationY = Random.Range(-2f, 2f);
-            rotationZ = Random.Range(-2f, 2f);
-            currentScaleX = Random.Range(MinScale, MaxScale);
-            currentScaleY = Random.Range(MinScale, MaxScale);
-            currentScaleZ = Random.Range(MinScale, MaxScale);
+            rotationX = Random.Range(-1f, 1f);
+            rotationY = Random.Range(-1f, 1f);
+            rotationZ = Random.Range(-1f, 1f);
+            float scale = Random.Range(MinScale, MaxScale);
+            currentScaleX = scale;
+            currentScaleY = scale;
+            currentScaleZ = scale;
 
 
             // to move the enemy into different directions
