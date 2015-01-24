@@ -14,9 +14,12 @@ namespace SharkInvador
         public GameObject projectilePrefab;         //defines the object projectile
         public GameObject Projectile2Prefab;        //defines the object projectile
         public GameObject ExplosionPrefab;          //defines the explosions
+        public GameObject EnemyPrefab;          //defines the explosions
 
         public GUIStyle backgroundStyle;
         public GUIStyle thumbStyle;
+
+        private static float time = 60;
 
         private float shipInvisibleTime = 1.5f;     //time ship is invisible
         private float shipMoveOnToScreenSpeed = 5f; //speed for movement on screen
@@ -34,6 +37,9 @@ namespace SharkInvador
         public static int lives2 = 3;                //lives that are still remaining (player 2)
 
         //public static int klicks = 0;               //number of times shot (for debug)
+
+        private bool first = true;
+        private bool second = true;
 
         #endregion
 
@@ -66,7 +72,7 @@ namespace SharkInvador
             yield return new WaitForSeconds(shipInvisibleTime);
 
             //if player still has enough lives
-            if (lives > 0)
+            if (lives > 0 && lives2 > 0)
             {
                 while (transform.position.y < -2.2)
                 {
@@ -117,6 +123,27 @@ namespace SharkInvador
         // Update is called once per frame
         void Update()
         {
+            time -= Time.deltaTime ;
+
+            if (time < 40 && first)
+            {
+                Instantiate(EnemyPrefab);
+                first = false;
+            }
+            if (time < 20 && second)
+            {
+                Instantiate(EnemyPrefab);
+                Instantiate(EnemyPrefab);
+                second = false;
+            }
+            if (time < 0)
+            {
+                lives = 0;
+                lives2 = 0;
+                StartCoroutine("DestroyShip");
+            }
+
+
             //only let player do something if he did not explode
             if (state != State.Explosion)
             {
@@ -182,20 +209,21 @@ namespace SharkInvador
                 }
 
 
-
+                //Debug.Log(Screen.width);
+                //Debug.Log(transform.position);
 
 
                 // ScreenWrap
                 // lets the player reapear at the other side if the screeen horizontal
-                if (transform.position.x < -6.6f)
-                    transform.position = new Vector3(6.6f, transform.position.y, transform.position.z);
-                else if (transform.position.x > 6.6f)
-                    transform.position = new Vector3(-6.6f, transform.position.y, transform.position.z);
+                if (transform.position.x < -9f)
+                    transform.position = new Vector3(-9f, transform.position.y, transform.position.z);
+                else if (transform.position.x > 9f)
+                    transform.position = new Vector3(9f, transform.position.y, transform.position.z);
                 // lets the player reapear at the other side if the screeen vertical
-                if (transform.position.y < -4.6f)
-                    transform.position = new Vector3(transform.position.x, 6.6f, transform.position.z);
-                else if (transform.position.y > 6.6f)
-                    transform.position = new Vector3(transform.position.x, -4.6f, transform.position.z);
+                if (transform.position.y < -4f)
+                    transform.position = new Vector3(transform.position.x, -4f, transform.position.z);
+                else if (transform.position.y > 6f)
+                    transform.position = new Vector3(transform.position.x, 6f, transform.position.z);
 
 
 
@@ -260,13 +288,13 @@ namespace SharkInvador
         void OnGUI()
         {
             //Display Score
-            GUI.Label(new Rect(10, 10, 200, 20), "Lives P1: " + Player.lives.ToString());
+            GUI.Label(new Rect(10, Screen.height - 60, 200, 20), "Lives P1: " + Player.lives.ToString());
 
             //Display Lives
-            GUI.Label(new Rect(10, 30, 200, 20), "Lives P2: " + Player.lives2.ToString());
+            GUI.Label(new Rect(Screen.width - 210, Screen.height - 60, 200, 20), "Lives P2: " + Player.lives2.ToString());
 
-            //Display weapon selected
-            //GUI.Label(new Rect(10, 240, 200, 20), "Weapon: " + Player.weapon.ToString());
+            //Display time remaining 
+            GUI.Label(new Rect(Screen.width - 210, 10, 200, 20), Player.time.ToString());
 
 
 
@@ -280,8 +308,8 @@ namespace SharkInvador
             //Display the ammo of the selected weapon
 
             //Display ammo for the selected weapon
-            GUI.Label(new Rect(10, 260, 200, 20), "Ammo P1: " + Player.ammoP1.ToString());
-            GUI.Label(new Rect(10, 280, 200, 20), "Ammo P2: " + Player.ammoP2.ToString());
+            GUI.Label(new Rect(10, Screen.height - 40, 200, 20), "Ammo P1: " + Player.ammoP1.ToString());
+            GUI.Label(new Rect(Screen.width - 210, Screen.height - 40, 200, 20), "Ammo P2: " + Player.ammoP2.ToString());
             //if no ammo, display no ammo
             if (ammoP1 < 1 || ammoP2 < 1)
             {
@@ -316,10 +344,10 @@ namespace SharkInvador
 
 
                 //Decrease the players life
-                if (gameObject.tag == "Player")
+                /*if (gameObject.tag == "Player")
                     Player.lives--;
                 if (gameObject.tag == "Player2")
-                    Player.lives2--;
+                    Player.lives2--;*/
 
                 //Set a new position and speed for the hit enemy
                 Enemy enemy = (Enemy)otherObject.gameObject.GetComponent("Enemy");
@@ -406,12 +434,14 @@ namespace SharkInvador
             {
                 // moves the player horizontaly
 
-                if (Input.GetKey(KeyCode.Y))
+                if (Input.GetKeyDown(KeyCode.Y) && ammoP1 > 0)
                 {
                     //determine position
                     Vector3 position = new Vector3(transform.position.x, transform.position.y + projectileOffset, transform.position.z);
                     //fire projectile
                     Instantiate(projectilePrefab, position, Quaternion.identity);
+                    //subtract amunition
+                    ammoP1--;
                 }
             }
             //Player 2
@@ -419,12 +449,14 @@ namespace SharkInvador
             {
                 // moves the player horizontaly
 
-                if (Input.GetKey(KeyCode.Keypad0))
+                if (Input.GetKeyDown(KeyCode.Keypad0) && ammoP2 > 0)
                 {
                     //determine position
                     Vector3 position = new Vector3(transform.position.x, transform.position.y + projectileOffset, transform.position.z);
                     //fire projectile
                     Instantiate(projectilePrefab, position, Quaternion.identity);
+                    //subtract amunition
+                    ammoP2--;
                 }
             }
 

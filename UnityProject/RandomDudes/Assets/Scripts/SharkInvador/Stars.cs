@@ -10,6 +10,7 @@ namespace SharkInvador
     {
 
         public float speed;     //variable for the speed
+        private int count = 0;
 
 
 
@@ -25,7 +26,11 @@ namespace SharkInvador
             //set back to top if background rached the bottom
             if (transform.position.y < -10.75f)
             {
+                count++;
+                if (count > 5)
+                    speed = speed * 2;
                 transform.position = new Vector3(transform.position.x, 14f, transform.position.z);
+                
             }
 
         }

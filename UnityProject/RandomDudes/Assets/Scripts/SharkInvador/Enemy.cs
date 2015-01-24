@@ -13,6 +13,8 @@ namespace SharkInvador
         public float minSpeed;                  //the minimum speed of enemy
         public float maxSpeed;                  //the maximum speed of enemy
         private float x, y, z;                  //coordinates of random new position
+        private float minSideways = -0.05f;                 //variable for the sideways direction of enemy
+        private float maxSideways = 0.05f;                 //variable for the sideways direction of enemy
         private float sideways;                 //variable for the sideways direction of enemy
         private float rotationX;                //random for the x axis rotation
         private float rotationY;                //random for the y axis rotation
@@ -59,10 +61,10 @@ namespace SharkInvador
 
             // ScreenWrap
             // lets the enemy reapear at the other side if the screeen horizontal
-            if (transform.position.x < -6.6f)
-                transform.position = new Vector3(6.6f, transform.position.y, transform.position.z);
-            else if (transform.position.x > 6.6f)
-                transform.position = new Vector3(-6.6f, transform.position.y, transform.position.z);
+            if (transform.position.x < -9.3f)
+                transform.position = new Vector3(9.3f, transform.position.y, transform.position.z);
+            else if (transform.position.x > 9.3f)
+                transform.position = new Vector3(-9.3f, transform.position.y, transform.position.z);
 
         }
 
@@ -86,14 +88,16 @@ namespace SharkInvador
 
 
             // to move the enemy into different directions
-            sideways = Random.Range(-0.05f, 0.05f);
+            minSideways -= 0.01f;
+            maxSideways += 0.01f;
+            sideways = Random.Range(minSideways, maxSideways);
             //set new speed
-            minSpeed += 0.5f;
-            maxSpeed += 1f;
+            minSpeed += 0.05f;
+            maxSpeed += 0.5f;
             currentSpeed = Random.Range(minSpeed, maxSpeed);
 
             //set new position
-            x = Random.Range(-6f, 6f);
+            x = Random.Range(-9f, 9f);
             y = 7f;
             z = 0f;
             transform.position = new Vector3(x, y, z);

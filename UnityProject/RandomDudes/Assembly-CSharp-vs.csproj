@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\SharkInvador\Ammo.cs" />
+     <Compile Include="Assets\Scripts\SharkInvador\Background.cs" />
      <Compile Include="Assets\Scripts\SharkInvador\Enemy.cs" />
      <Compile Include="Assets\Scripts\SharkInvador\KillParticleSystem.cs" />
      <Compile Include="Assets\Scripts\SharkInvador\Player.cs" />
