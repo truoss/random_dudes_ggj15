@@ -32,6 +32,7 @@ namespace SharkInvador
         public Texture Banana2;
         public Texture Banana3;
         private int selection;
+        private int count = 0;
         #endregion
 
 
@@ -82,6 +83,7 @@ namespace SharkInvador
         //function to inizialize the positon and speed
         public void SetPositionAndSpeed()
         {
+            
             selection = Random.Range(0, 3);
             switch (selection)
             {
@@ -103,10 +105,20 @@ namespace SharkInvador
             rotationX = Random.Range(-1f, 1f);
             rotationY = Random.Range(-1f, 1f);
             rotationZ = Random.Range(-1f, 1f);
-            float scale = Random.Range(MinScale, MaxScale);
-            currentScaleX = scale;
-            currentScaleY = scale;
-            currentScaleZ = scale;
+            if (!BananaExploder.explode)
+            {
+                float scale = Random.Range(MinScale, MaxScale);
+                currentScaleX = scale;
+                currentScaleY = scale;
+                currentScaleZ = scale;
+            }
+            else
+            {
+                float scale = Random.Range(1, 2);
+                currentScaleX = scale;
+                currentScaleY = scale;
+                currentScaleZ = scale;
+            }
 
 
             // to move the enemy into different directions
@@ -118,11 +130,19 @@ namespace SharkInvador
             maxSpeed += 0.5f;
             currentSpeed = Random.Range(minSpeed, maxSpeed);
 
-            //set new position
-            x = Random.Range(-9f, 9f);
-            y = 7f;
-            z = 0f;
-            transform.position = new Vector3(x, y, z);
+            if (!BananaExploder.explode)
+            {
+                //set new position
+                x = Random.Range(-9f, 9f);
+                y = 7f;
+                z = 0f;
+                transform.position = new Vector3(x, y, z);
+            }
+            else
+            {
+                transform.position = BananaExploder.position;
+                BananaExploder.explode = false;
+            }
 
             //set new scale
             transform.localScale = new Vector3(currentScaleX, currentScaleY, currentScaleZ);
@@ -142,5 +162,8 @@ namespace SharkInvador
             SetPositionAndSpeed();
             //Player.missed++;
         }
+
+
+        
     }
 }
