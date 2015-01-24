@@ -1,27 +1,33 @@
 ﻿using UnityEngine;
+using SharkInvador;
 using System.Collections;
 
-public class Stars : MonoBehaviour
+
+
+namespace SharkInvador
 {
-
-    public float speed;     //variable for the speed
-
-
-
-
-
-    // Update is called once per frame
-    void Update()
+    public class Stars : MonoBehaviour
     {
-        //set the speed of the background
-        float amtToMove = speed * Time.deltaTime;
-        transform.Translate(Vector3.down * amtToMove, Space.World);
 
-        //set back to top if background rached the bottom
-        if (transform.position.y < -10.75f)
+        public float speed;     //variable for the speed
+
+
+
+
+
+        // Update is called once per frame
+        void Update()
         {
-            transform.position = new Vector3(transform.position.x, 14f, transform.position.z);
-        }
+            //set the speed of the background
+            float amtToMove = speed * Time.deltaTime;
+            transform.Translate(Vector3.down * amtToMove, Space.World);
 
+            //set back to top if background rached the bottom
+            if (transform.position.y < -10.75f)
+            {
+                transform.position = new Vector3(transform.position.x, 14f, transform.position.z);
+            }
+
+        }
     }
 }
