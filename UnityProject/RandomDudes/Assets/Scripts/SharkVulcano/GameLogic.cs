@@ -22,12 +22,27 @@ namespace SharkVulcano
 
         void Start()
         {
-            SetState(GameState.PLAYING);
+            SetState(GameState.START);
         }
 
         public void SetState(GameState state)
         {
             curState = state;
+
+            switch (curState)
+            {
+                case GameState.START:
+                    Spawner.I.Init();
+                    break;
+                case GameState.PLAYING:
+                    break;
+                case GameState.LEFTWINS:
+                    break;
+                case GameState.RIGHTWINS:
+                    break;
+                default:
+                    break;
+            }
             
         }
 

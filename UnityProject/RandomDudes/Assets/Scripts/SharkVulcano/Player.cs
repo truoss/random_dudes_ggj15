@@ -94,7 +94,14 @@ namespace SharkVulcano
         void OnCollisionEnter(Collision collision)
         {
             if (collision.transform.GetComponent<Ball>() != null)
-                Destroy(gameObject);
+            {
+                if (isLeft)
+                    GameLogic.I.SetState(GameLogic.GameState.RIGHTWINS);
+                else
+                    GameLogic.I.SetState(GameLogic.GameState.LEFTWINS);
+
+                Destroy(this.gameObject);
+            }
         }
     }
 }

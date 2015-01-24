@@ -6,14 +6,27 @@ namespace SharkVulcano
 {
     public class Spawner : MonoBehaviour
     {
+        public static Spawner I;
         public Transform[] spawnPoints;
         //public List<Transform> ballPool = new List<Transform>();
         public Transform ballPrefab;
 
-        void Start()
+        void Awake()
+        {
+            I = this;
+        }
+
+        public void Init()
         {
             //Invoke("SpawnBall", 1);
             InvokeRepeating("SpawnBall", 1, 0.5f);
+            GameLogic.I.SetState(GameLogic.GameState.PLAYING);
+        }
+
+        void Update()
+        {
+            if (GameLogic.I.curState == GameLogic.GameState.RIGHTWINS || GameLogic.I.curState == GameLogic.GameState.LEFTWINS)
+                CancelInvoke();
         }
 
         void SpawnBall()
