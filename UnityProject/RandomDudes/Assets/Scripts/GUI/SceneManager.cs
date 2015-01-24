@@ -13,12 +13,12 @@ public class SceneManager : MonoBehaviour
     [ContextMenu("Load Vulcano")]
     public void LoadVulcano()
     {
-        Application.LoadLevel(2);
+        Application.LoadLevel(1);
     }
 
     [ContextMenu("Load Pac")]
     public void LoadPac()
     {
-        Application.LoadLevel(1);
+        Application.LoadLevel(0);
     }
 }

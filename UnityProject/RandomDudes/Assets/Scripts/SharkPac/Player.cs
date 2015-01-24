@@ -29,13 +29,13 @@ namespace SharkPac
             //userinput
             if (isPlayer1)
             {
-                hInput = Input.GetAxisRaw("Horizontal2");
-                vInput = Input.GetAxisRaw("Vertical2");
+                hInput = Input.GetAxisRaw("Horizontal");
+                vInput = Input.GetAxisRaw("Vertical");
             }
             else
             {
-                hInput = Input.GetAxisRaw("Horizontal");
-                vInput = Input.GetAxisRaw("Vertical");
+                hInput = Input.GetAxisRaw("Horizontal2");
+                vInput = Input.GetAxisRaw("Vertical2");
             }
 
             if (hInput != 0)

@@ -38,9 +38,9 @@ namespace SharkVulcano
         {
             //userinput
             if (isLeft)
-                hInput = -Input.GetAxisRaw("Horizontal2");
-            else
                 hInput = -Input.GetAxisRaw("Horizontal");
+            else
+                hInput = -Input.GetAxisRaw("Horizontal2");
             //vInput = Input.GetAxisRaw("Vertical");
 
             if (hInput != 0)

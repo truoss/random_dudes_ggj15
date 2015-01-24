@@ -19,8 +19,8 @@ namespace SharkPac
         void Awake()
         {
             I = this;
-
-            Application.LoadLevelAdditive(0);
+            
+            Application.LoadLevelAdditive(2);
         }
 
         void Start()
