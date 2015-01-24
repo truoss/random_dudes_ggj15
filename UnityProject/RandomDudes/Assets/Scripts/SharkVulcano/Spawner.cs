@@ -23,11 +23,13 @@ namespace SharkVulcano
             GameLogic.I.SetState(GameLogic.GameState.PLAYING);
         }
 
+        /*
         void Update()
         {
             if (GameLogic.I.curState == GameLogic.GameState.RIGHTWINS || GameLogic.I.curState == GameLogic.GameState.LEFTWINS)
                 CancelInvoke();
         }
+        */
 
         void SpawnBall()
         {

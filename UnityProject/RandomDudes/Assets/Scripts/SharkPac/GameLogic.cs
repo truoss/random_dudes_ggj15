@@ -17,7 +17,9 @@ namespace SharkPac
 
         void Awake()
         {
-            I = this;            
+            I = this;
+
+            Application.LoadLevelAdditive(0);
         }
 
         void Start()
@@ -33,6 +35,19 @@ namespace SharkPac
             switch (curState)
             {
                 case GameState.START:
+                    if (MainUI.I)
+                    {
+                        if (Random.Range(0, 2) > 0.5)
+                        {
+                            MainUI.I.SetLeftCharacter(MainUI.CharacterState.DUDE);
+                            MainUI.I.SetRightCharacter(MainUI.CharacterState.SHARK);
+                        }
+                        else
+                        {
+                            MainUI.I.SetLeftCharacter(MainUI.CharacterState.SHARK);
+                            MainUI.I.SetRightCharacter(MainUI.CharacterState.DUDE);
+                        }
+                    }
                     FieldManager.I.InitFields();                    
                     break;
                 case GameState.PLAYING:

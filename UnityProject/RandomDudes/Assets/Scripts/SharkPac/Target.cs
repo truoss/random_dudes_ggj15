@@ -8,8 +8,11 @@ namespace SharkPac
         void OnCollisionEnter2D(Collision2D collision)
         {
             //Debug.LogWarning("Target: " + collision, collision.gameObject);
-            if (collision.transform.GetComponent<PlayerDude>() != null)
-                GameLogic.I.SetState(GameLogic.GameState.DUDEWINS);
+            if (collision.transform.GetComponent<Player>() != null)
+            {
+                if (collision.transform.GetComponent<Player>().character == MainUI.CharacterState.DUDE)
+                    GameLogic.I.SetState(GameLogic.GameState.DUDEWINS);
+            }  
         }
     }
 }
