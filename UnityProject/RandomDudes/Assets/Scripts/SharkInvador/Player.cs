@@ -214,7 +214,7 @@ namespace SharkInvador
                 //rotate player sideways when moving horizontally right
                 if (amtToMoveH > 0)
                 {
-                    Quaternion target = Quaternion.Euler(0, -30, 0);
+                    Quaternion target = Quaternion.Euler(-90, -30, 0);
                     transform.localRotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * playerSpeed);
 
                 }
@@ -222,28 +222,28 @@ namespace SharkInvador
                 //rotate player sideways when moving horizontally left
                 else if (amtToMoveH < 0)
                 {
-                    Quaternion target = Quaternion.Euler(0, 30, 0);
+                    Quaternion target = Quaternion.Euler(-90, 30, 0);
                     transform.localRotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * playerSpeed);
                 }
 
                 //rotate player sideways when moving forward
                 else if (amtToMoveV < 0)
                 {
-                    Quaternion target = Quaternion.Euler(-30, 0, 0);
+                    Quaternion target = Quaternion.Euler(-120, 0, 0);
                     transform.localRotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * playerSpeed);
                 }
 
                 //rotate player sideways when moving back
                 else if (amtToMoveV > 0)
                 {
-                    Quaternion target = Quaternion.Euler(30, 0, 0);
+                    Quaternion target = Quaternion.Euler(-60, 0, 0);
                     transform.localRotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * playerSpeed);
                 }
 
                 // else go back to normal position
                 else
                 {
-                    Quaternion target = Quaternion.Euler(0, 0, 0);
+                    Quaternion target = Quaternion.Euler(-90, 0, 0);
                     transform.localRotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * playerSpeed);
                 }
 
