@@ -69,14 +69,14 @@ namespace SharkInvador
             //play explosion
             Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
             //change the position below the screen
-            transform.position = new Vector3(0f, -5.5f, transform.position.z);
+            transform.position = new Vector3(0f, -8f, transform.position.z);
             //wait for a few seconds
             yield return new WaitForSeconds(shipInvisibleTime);
 
             //if player still has enough lives
             if (lives > 0 && lives2 > 0)
             {
-                while (transform.position.y < -2.2)
+                while (transform.position.y < -4f)
                 {
                     //move the ship up
                     float amtToMove = shipMoveOnToScreenSpeed * Time.deltaTime;
