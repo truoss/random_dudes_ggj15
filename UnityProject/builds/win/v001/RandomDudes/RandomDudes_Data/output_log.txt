@@ -1,0 +1,23 @@
+Initialize engine version: 4.6.1f1 (d1db7a1b5196)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GT 555M   (ID=0x124d)
+    Vendor:   NVIDIA
+    VRAM:     3019 MB
+Default GameObject Tag: Player already registered
+ 
+(Filename:  Line: 67)
+
+Begin MonoManager ReloadAssembly
+Platform assembly: D:\_projects\Unity Projects\random_dudes_ggj15\UnityProject\builds\win\v001\RandomDudes\RandomDudes_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\_projects\Unity Projects\random_dudes_ggj15\UnityProject\builds\win\v001\RandomDudes\RandomDudes_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\_projects\Unity Projects\random_dudes_ggj15\UnityProject\builds\win\v001\RandomDudes\RandomDudes_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading D:\_projects\Unity Projects\random_dudes_ggj15\UnityProject\builds\win\v001\RandomDudes\RandomDudes_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: D:\_projects\Unity Projects\random_dudes_ggj15\UnityProject\builds\win\v001\RandomDudes\RandomDudes_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading D:\_projects\Unity Projects\random_dudes_ggj15\UnityProject\builds\win\v001\RandomDudes\RandomDudes_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.056 seconds
+<RI> Initializing input.
+<RI> Input initialized.
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+Platform assembly: D:\_projects\Unity Projects\random_dudes_ggj15\UnityProject\builds\win\v001\RandomDudes\RandomDudes_Data\Managed\System.Core.dll (this message is harmless)
