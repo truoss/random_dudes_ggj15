@@ -4,32 +4,27 @@ using System.Collections;
 namespace SharkPac
 {
     public class PlayerDude : BasePlayer
-    {        
-        internal override void DoUpdate()
+    {
+        internal override bool GetUserInput()
         {
-            int x = 0;
-            int y = 0;
+            //userinput
+            hInput = Input.GetAxisRaw("Horizontal");
+            vInput = Input.GetAxisRaw("Vertical");
 
-            if (Input.GetKey(KeyCode.W))
-            {
-                y = 1;
-            }
-            else if (Input.GetKey(KeyCode.S))
-            {
-                y = -1;
-            }
+            if (hInput != 0)
+                return true;
 
-            if (Input.GetKey(KeyCode.D))
-            {
-                x = 1;
-            }
-            else if (Input.GetKey(KeyCode.A))
-            {
-                x = -1;
-            }
+            if (vInput != 0)
+                return true;
 
-            if(!(x == 0 && y == 0))
-                Move(x, y);
+            return false;
         }
+
+        void OnCollisionEnter2D(Collision2D collision)
+        {
+            //Debug.LogWarning("blub: " + collision, collision.gameObject);
+            if (collision.transform.GetComponent<PlayerShark>() != null)
+                GameLogic.I.SetState(GameLogic.GameState.SHARKWINS);
+        }               
     }
 }

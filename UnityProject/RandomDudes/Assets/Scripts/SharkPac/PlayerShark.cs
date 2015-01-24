@@ -5,31 +5,19 @@ namespace SharkPac
 {
     public class PlayerShark : BasePlayer
     {
-        internal override void DoUpdate()
+        internal override bool GetUserInput()
         {
-            int x = 0;
-            int y = 0;
+            //userinput
+            hInput = Input.GetAxisRaw("Horizontal2");
+            vInput = Input.GetAxisRaw("Vertical2");
 
-            if (Input.GetKey(KeyCode.UpArrow))
-            {
-                y = 1;
-            }
-            else if (Input.GetKey(KeyCode.DownArrow))
-            {
-                y = -1;
-            }
+            if (hInput != 0)
+                return true;
 
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                x = 1;
-            }
-            else if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                x = -1;
-            }
+            if (vInput != 0)
+                return true;
 
-            if (!(x == 0 && y == 0))
-                Move(x, y);
+            return false;
         }
     }
 }

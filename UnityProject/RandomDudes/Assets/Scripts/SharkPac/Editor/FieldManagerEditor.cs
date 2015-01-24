@@ -17,6 +17,11 @@ public class FieldManagerEditor : Editor
         FieldManager fieldManager = (FieldManager)target;
         Field[,] field = fieldManager.fields;
 
+        if (GUILayout.Button("Update Obstacle"))
+            fieldManager.InitFields();
+
+        GUILayout.Space(16);
+
         GUILayout.Label("Set Cliffs: ");
 
         EditorGUILayout.BeginVertical();
