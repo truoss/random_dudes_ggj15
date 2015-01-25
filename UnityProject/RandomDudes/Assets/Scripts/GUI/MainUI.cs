@@ -51,15 +51,16 @@ public class MainUI : MonoBehaviour
     IEnumerator UpdateCounter(int time, UnityAction action)
     {
         CountDownText.gameObject.SetActive(true);
-        for (int i = time; i == 0; i--)
+        for (int i = time; i >= 0; i--)
         {
             CountDownText.text = i.ToString();
             yield return new WaitForSeconds(1);
+            Debug.LogWarning("Blub");
         }
 
         yield return new WaitForSeconds(1);
         CountDownText.gameObject.SetActive(false);
-
+        Debug.LogWarning("finished UpdateCounter");
         action();
     }
 

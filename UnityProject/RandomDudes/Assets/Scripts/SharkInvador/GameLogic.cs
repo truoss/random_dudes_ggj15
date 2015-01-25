@@ -45,6 +45,8 @@ namespace SharkInvador
                         MainUI.I.SetLeftCharacter(MainUI.CharacterState.DUDE);
                         MainUI.I.SetRightCharacter(MainUI.CharacterState.DUDE);
                     }
+                    else
+                        Debug.LogWarning("blub");
                     Player.I.Init();
                     break;
                 case GameState.PLAYING:

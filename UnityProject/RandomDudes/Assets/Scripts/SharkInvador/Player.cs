@@ -164,6 +164,7 @@ namespace SharkInvador
             //only let player do something if he did not explode
             if (state != State.Finished && state != State.Explosion && GameLogic.curState == GameLogic.GameState.PLAYING)
             {
+                /*
                 if (time < 0)
                 {
                     //lives = 0;
@@ -174,6 +175,7 @@ namespace SharkInvador
                     if (GameLogic.curState == GameLogic.GameState.PLAYING)
                         GameLogic.I.SetState(GameLogic.GameState.BOTHWIN);
                 }
+                */
 
                 float amtToMoveV = 0;
                 float amtToMoveH = 0;
@@ -295,9 +297,18 @@ namespace SharkInvador
             second = true;
             state = State.Playing;
             GameLogic.curState = GameLogic.GameState.PLAYING;
+
+            if (MainUI.I)
+                MainUI.I.SetCountDown(30, BothWin);
         }
 
 
+        public void BothWin()
+        {
+            state = State.Finished;
+            if (GameLogic.curState == GameLogic.GameState.PLAYING)
+                GameLogic.I.SetState(GameLogic.GameState.BOTHWIN);
+        }
 
 
 #if UNITY_EDITOR
