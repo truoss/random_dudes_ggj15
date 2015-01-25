@@ -55,13 +55,13 @@ namespace SharkInvador
                     MainUI.I.AddLeftPlayerScore();
                     WinDialog.I.SetImageState(WinDialog.ImageState.LEFT);
                     //SetState(GameState.START);
-                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadIntroLevel));
                     break;
                 case GameState.RIGHTWINS:
                     MainUI.I.AddRightPlayerScore();
                     WinDialog.I.SetImageState(WinDialog.ImageState.RIGHT);
                     //SetState(GameState.START);
-                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadIntroLevel));
                     break;
                 case GameState.BOTHWIN:
                     MainUI.I.AddRightPlayerScore();
@@ -69,7 +69,7 @@ namespace SharkInvador
                     //WinDialog.I.SetImageState(WinDialog.ImageState.LEFT);
                     //WinDialog.I.SetImageState(WinDialog.ImageState.RIGHT);
                     //SetState(GameState.START);
-                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadIntroLevel));
                     break;
                 default:
                     break;

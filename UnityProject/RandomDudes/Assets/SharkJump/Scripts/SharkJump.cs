@@ -374,7 +374,7 @@ public class PlayerProxy
             }
 
             //SetState(GameState.START);
-            SharkJump.I.StartCoroutine(SharkJump.I.Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+            SharkJump.I.StartCoroutine(SharkJump.I.Wait(3, (UnityAction)SceneManager.I.LoadIntroLevel));
         }
 
         if (_myTransform.position.y >= Owner.cameraSettings.CurrentHighestYPosition)
@@ -396,7 +396,7 @@ public class PlayerProxy
 
             
             //SetState(GameState.START);
-            SharkJump.I.StartCoroutine(SharkJump.I.Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+            SharkJump.I.StartCoroutine(SharkJump.I.Wait(3, (UnityAction)SceneManager.I.LoadIntroLevel));
         }
         AnimationUpdate();
     }

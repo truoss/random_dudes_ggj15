@@ -4,7 +4,7 @@ using System.Collections;
 public class SceneManager : MonoBehaviour 
 {
     public static SceneManager I;
-    private int lastLevel = 2;
+    private static int lastLevel = 1;
     public int[] LevelIndices;
 
     void Awake()
@@ -12,6 +12,14 @@ public class SceneManager : MonoBehaviour
         I = this;
     }
 
+    public void LoadIntroLevel()
+    {
+        //.LogWarning("lastLevel: " + lastLevel);
+        //int value = GetNumber();
+        //lastLevel = value;
+        Application.LoadLevel("Intro");        
+    }
+    
     public void LoadNextLevel()
     {
         //.LogWarning("lastLevel: " + lastLevel);
@@ -19,6 +27,7 @@ public class SceneManager : MonoBehaviour
         lastLevel = value;
         Application.LoadLevel(value);        
     }
+    
 
     private int GetNumber()
     {
@@ -26,7 +35,7 @@ public class SceneManager : MonoBehaviour
         if (value == lastLevel)
             value = GetNumber();
         */
-        //Debug.LogWarning("GetNumber: " + value);
+        Debug.LogWarning("GetNumber: " + lastLevel);
         int value = lastLevel + 1;
         if (value > 5)
             value = 2;

@@ -29,7 +29,7 @@ public class MoveFlyingShark : MonoBehaviour
         }
 
         if (MainUI.I)
-            MainUI.I.SetCountDown(5, SharkWin);
+            MainUI.I.SetCountDown(30, SharkWin);
     }
 
     public void SharkWin()
@@ -39,13 +39,13 @@ public class MoveFlyingShark : MonoBehaviour
         {
             MainUI.I.AddLeftPlayerScore();
             WinDialog.I.SetImageState(WinDialog.ImageState.LEFT);
-            StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+            StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadIntroLevel));
         }
         else
         {
             MainUI.I.AddRightPlayerScore();
             WinDialog.I.SetImageState(WinDialog.ImageState.RIGHT);
-            StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+            StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadIntroLevel));
         }
     }
 
@@ -105,13 +105,13 @@ public class MoveFlyingShark : MonoBehaviour
             {
                 MainUI.I.AddRightPlayerScore();
                 WinDialog.I.SetImageState(WinDialog.ImageState.RIGHT);
-                StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+                StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadIntroLevel));
             }
             else
             {
                 MainUI.I.AddLeftPlayerScore();
                 WinDialog.I.SetImageState(WinDialog.ImageState.LEFT);
-                StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+                StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadIntroLevel));
             }
         }
     }

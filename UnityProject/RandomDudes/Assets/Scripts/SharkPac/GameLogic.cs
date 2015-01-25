@@ -61,13 +61,13 @@ namespace SharkPac
                     MainUI.I.AddRightPlayerScore();
                     WinDialog.I.SetImageState(WinDialog.ImageState.RIGHT);
                     //SetState(GameState.START);
-                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadIntroLevel));
                     break;
                 case GameState.PLAYER1WINS:
                     MainUI.I.AddLeftPlayerScore();
                     WinDialog.I.SetImageState(WinDialog.ImageState.LEFT);
                     //SetState(GameState.START);
-                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadIntroLevel));
                     break;
                 default:
                     break;
