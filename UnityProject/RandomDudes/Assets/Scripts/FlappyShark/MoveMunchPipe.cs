@@ -6,18 +6,20 @@ public class MoveMunchPipe : MonoBehaviour {
 
     public float speed;     //variable for the speed
     public float munchSpeed;
-    public float time = 60f;
+    public float time = 30f;
 
     private bool first = true;
     private bool second = true;
+    private bool third = true;
 
-
+    
 
 
     // Update is called once per frame
     void Update()
     {
         time -= Time.deltaTime;
+        Debug.LogWarning(time);
         //set the speed of the background
         float amtToMove = speed * Time.deltaTime;
         transform.Translate(Vector3.left * amtToMove, Space.World);
@@ -29,26 +31,27 @@ public class MoveMunchPipe : MonoBehaviour {
 
         }
 
-        if (time < 40 && first)
+        if (time < 20 && first)
         {
-            munchSpeed = munchSpeed * 2;
+            speed = speed +4;
             first = false;
         }
-        if (time < 20 && second)
+        if (time < 10 && second)
         {
-            munchSpeed = munchSpeed * 2;
+            speed = speed +4;
             second = false;
         }
-        if (time < 0 && first)
+        if (time < 0 && third)
         {
             //nextgame
             MainUI.I.AddLeftPlayerScore();
             StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+            third = false;
         }
 
         float amtToMoveV = 0;
         //moves the munch pipe verticaly
-        if (transform.position.x < 9f && transform.position.x > 0f )
+        if (transform.position.x < 11f && transform.position.x > 0f )
         {
             amtToMoveV = Input.GetAxis("Vertical2") * munchSpeed * Time.deltaTime;
 

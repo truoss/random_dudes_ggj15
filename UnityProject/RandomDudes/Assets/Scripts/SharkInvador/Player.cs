@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using SharkInvador;
 using UnityEngine.Events;
 
 
@@ -8,6 +9,8 @@ namespace SharkInvador
     public class Player : MonoBehaviour
     {
         #region fields
+
+        public static Player I;
 
         public float playerSpeed;                   //defines speed of the player
         public float projectileOffset;              //defines where the projectile starts
@@ -51,11 +54,21 @@ namespace SharkInvador
         {
             Playing,
             Explosion,
-            Invincible
+            Invincible,
+            Finished
         };
 
         private State state = State.Playing;        //sets the state at the beginning
-        
+
+
+
+        void Awake()
+        {
+            I = this;
+
+            Init();
+        }
+
 
         //coroutine for the Destroy ship
         IEnumerator DestroyShip()
@@ -72,7 +85,7 @@ namespace SharkInvador
             //if player still has enough lives
             if (lives > 0 && lives2 > 0)
             {
-                while (transform.position.y < -4f)
+                while (transform.position.y < -2f)
                 {
                     //move the ship up
                     float amtToMove = shipMoveOnToScreenSpeed * Time.deltaTime;
@@ -101,26 +114,28 @@ namespace SharkInvador
             else
             {
                 if (gameObject.tag == "Player")
-                {                    
-                    MainUI.I.AddLeftPlayerScore();
-                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+                {
+                    state = State.Finished;
+                    if(GameLogic.curState == GameLogic.GameState.PLAYING)
+                        GameLogic.I.SetState(GameLogic.GameState.RIGHTWINS);
                 }
                 if (gameObject.tag == "Player2")
                 {
-                    MainUI.I.AddRightPlayerScore();
-                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+                    state = State.Finished;
+                    if (GameLogic.curState == GameLogic.GameState.PLAYING)
+                        GameLogic.I.SetState(GameLogic.GameState.LEFTWINS);
                 }
             }
 
         }
 
 
-        public IEnumerator Wait(int p, UnityAction action)
+        /*public IEnumerator Wait(int p, UnityAction action)
         {
             yield return new WaitForSeconds(p);
 
             action();
-        }
+        }*/
 
 
 
@@ -147,17 +162,17 @@ namespace SharkInvador
 
 
             //only let player do something if he did not explode
-            if (state != State.Explosion)
+            if (state != State.Finished && state != State.Explosion && GameLogic.curState == GameLogic.GameState.PLAYING)
             {
                 if (time < 0)
                 {
-                    lives = 0;
-                    lives2 = 0;
+                    //lives = 0;
+                    //lives2 = 0;
                     //StartCoroutine("DestroyShip");
                     //next game
-                    MainUI.I.AddRightPlayerScore();
-                    MainUI.I.AddLeftPlayerScore();
-                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+                    state = State.Finished;
+                    if (GameLogic.curState == GameLogic.GameState.PLAYING)
+                        GameLogic.I.SetState(GameLogic.GameState.BOTHWIN);
                 }
 
                 float amtToMoveV = 0;
@@ -203,15 +218,15 @@ namespace SharkInvador
 
                 // ScreenWrap
                 // lets the player reapear at the other side if the screeen horizontal
-                if (transform.position.x < -9f)
-                    transform.position = new Vector3(-9f, transform.position.y, transform.position.z);
-                else if (transform.position.x > 9f)
-                    transform.position = new Vector3(9f, transform.position.y, transform.position.z);
+                if (transform.position.x < -8.5f)
+                    transform.position = new Vector3(-8.5f, transform.position.y, transform.position.z);
+                else if (transform.position.x > 8.5f)
+                    transform.position = new Vector3(8.5f, transform.position.y, transform.position.z);
                 // lets the player reapear at the other side if the screeen vertical
-                if (transform.position.y < -4f)
-                    transform.position = new Vector3(transform.position.x, -4f, transform.position.z);
-                else if (transform.position.y > 6f)
-                    transform.position = new Vector3(transform.position.x, 6f, transform.position.z);
+                if (transform.position.y < -3.5f)
+                    transform.position = new Vector3(transform.position.x, -3.5f, transform.position.z);
+                else if (transform.position.y > 5.5f)
+                    transform.position = new Vector3(transform.position.x, 5.5f, transform.position.z);
 
 
 
@@ -267,6 +282,20 @@ namespace SharkInvador
 
 
 
+
+        public void Init()
+        {
+            time = 60;
+            ammoP1 = 5;
+            ammoP2 = 5;
+            lives = 3;
+            lives2 = 3;
+            receivedAmmo = false;
+            first = true;
+            second = true;
+            state = State.Playing;
+            GameLogic.curState = GameLogic.GameState.PLAYING;
+        }
 
 
 

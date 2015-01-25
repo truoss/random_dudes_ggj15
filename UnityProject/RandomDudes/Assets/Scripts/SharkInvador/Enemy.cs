@@ -67,10 +67,10 @@ namespace SharkInvador
 
             // ScreenWrap
             // lets the enemy reapear at the other side if the screeen horizontal
-            if (transform.position.x < -9f)
-                transform.position = new Vector3(9f, transform.position.y, transform.position.z);
-            else if (transform.position.x > 9f)
-                transform.position = new Vector3(-9f, transform.position.y, transform.position.z);
+            if (transform.position.x < -8.5f)
+                transform.position = new Vector3(8.5f, transform.position.y, transform.position.z);
+            else if (transform.position.x > 8.5f)
+                transform.position = new Vector3(-8.5f, transform.position.y, transform.position.z);
 
         }
 

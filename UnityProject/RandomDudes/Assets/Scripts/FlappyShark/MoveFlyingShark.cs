@@ -9,18 +9,49 @@ public class MoveFlyingShark : MonoBehaviour
 
     public float sharkSpeed;
     private bool move = true;
+    public static int ranStart = 0;
+    public static bool Player1Shark = false;
+
+
+
+    void Start()
+    {
+        ranStart = Random.Range(0, 2);
+        if (ranStart == 0)
+            Player1Shark = true;
+        else
+            Player1Shark = false;
+
+    }
 
 
     // Update is called once per frame
     void Update()
     {
         float amtToMoveV = 0;
+        float amtToMoveH = 0;
         if (move)
         {
             
             //moves the munch pipe verticaly
+            if(Player1Shark)
+                amtToMoveH = Input.GetAxis("Horizontal") * sharkSpeed * Time.deltaTime;
+            else
+                amtToMoveH = Input.GetAxis("Horizontal2") * sharkSpeed * Time.deltaTime;
 
-            amtToMoveV = Input.GetAxis("Vertical") * sharkSpeed * Time.deltaTime;
+
+            transform.Translate(Vector3.right * amtToMoveH, Space.World);
+
+            if (transform.position.x < -8.5f)
+                transform.position = new Vector3(-8.5f, transform.position.y, transform.position.z);
+            if (transform.position.x > 0f)
+                transform.position = new Vector3(0f, transform.position.y, transform.position.z);
+
+            if (Player1Shark)
+                amtToMoveV = Input.GetAxis("Vertical") * sharkSpeed * Time.deltaTime;
+            else
+                amtToMoveV = Input.GetAxis("Vertical2") * sharkSpeed * Time.deltaTime;
+
 
             transform.Translate(Vector3.up * amtToMoveV, Space.World);
 
@@ -44,9 +75,17 @@ public class MoveFlyingShark : MonoBehaviour
         Debug.Log("Hit PIpe");
         move = false;
         //next game
-
-        MainUI.I.AddRightPlayerScore();
-        StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+        if()
+        if (Player1Shark)
+        {
+            MainUI.I.AddRightPlayerScore();
+            StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+        }
+        else
+        {
+            MainUI.I.AddLeftPlayerScore();
+            StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+        }
     }
 
     public IEnumerator Wait(int p, UnityAction action)
