@@ -10,7 +10,7 @@ public class MoveMunchPipe : MonoBehaviour {
 
     private bool first = true;
     private bool second = true;
-    private bool third = true;
+    public static bool third = true;
 
     
 
@@ -44,8 +44,16 @@ public class MoveMunchPipe : MonoBehaviour {
         if (time < 0 && third)
         {
             //nextgame
-            MainUI.I.AddLeftPlayerScore();
-            StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+            if (MoveFlyingShark.Player1Shark)
+            {
+                MainUI.I.AddLeftPlayerScore();
+                StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+            }
+            else
+            {
+                MainUI.I.AddRightPlayerScore();
+                StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+            }
             third = false;
         }
 
@@ -53,7 +61,10 @@ public class MoveMunchPipe : MonoBehaviour {
         //moves the munch pipe verticaly
         if (transform.position.x < 11f && transform.position.x > 0f )
         {
-            amtToMoveV = Input.GetAxis("Vertical2") * munchSpeed * Time.deltaTime;
+            if (MoveFlyingShark.Player1Shark)
+                amtToMoveV = Input.GetAxis("Vertical2") * munchSpeed * Time.deltaTime;
+            else
+                amtToMoveV = Input.GetAxis("Vertical") * munchSpeed * Time.deltaTime;
 
             transform.Translate(Vector3.up * amtToMoveV, Space.World);
 

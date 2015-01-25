@@ -75,16 +75,18 @@ public class MoveFlyingShark : MonoBehaviour
         Debug.Log("Hit PIpe");
         move = false;
         //next game
-        if()
-        if (Player1Shark)
+        if (MoveMunchPipe.third)
         {
-            MainUI.I.AddRightPlayerScore();
-            StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
-        }
-        else
-        {
-            MainUI.I.AddLeftPlayerScore();
-            StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+            if (Player1Shark)
+            {
+                MainUI.I.AddRightPlayerScore();
+                StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+            }
+            else
+            {
+                MainUI.I.AddLeftPlayerScore();
+                StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+            }
         }
     }
 
