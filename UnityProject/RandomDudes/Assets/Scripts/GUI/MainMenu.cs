@@ -14,7 +14,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        Application.LoadLevel(2);
+        Application.LoadLevel("Intro");
     }
 
     public void ShowCredits()
