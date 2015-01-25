@@ -19,7 +19,7 @@ public class MoveMunchPipe : MonoBehaviour {
     void Update()
     {
         time -= Time.deltaTime;
-        Debug.LogWarning(time);
+        //Debug.LogWarning(time);
         //set the speed of the background
         float amtToMove = speed * Time.deltaTime;
         transform.Translate(Vector3.left * amtToMove, Space.World);
@@ -41,6 +41,7 @@ public class MoveMunchPipe : MonoBehaviour {
             speed = speed +4;
             second = false;
         }
+        /*
         if (time < 0 && third)
         {
             //nextgame
@@ -56,6 +57,7 @@ public class MoveMunchPipe : MonoBehaviour {
             }
             third = false;
         }
+        */
 
         float amtToMoveV = 0;
         //moves the munch pipe verticaly

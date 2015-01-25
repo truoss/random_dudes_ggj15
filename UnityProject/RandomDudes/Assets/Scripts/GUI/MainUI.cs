@@ -55,7 +55,7 @@ public class MainUI : MonoBehaviour
         {
             CountDownText.text = i.ToString();
             yield return new WaitForSeconds(1);
-            Debug.LogWarning("Blub");
+            //Debug.LogWarning("Blub");
         }
 
         yield return new WaitForSeconds(1);

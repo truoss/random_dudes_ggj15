@@ -6,24 +6,48 @@ using UnityEngine.Events;
 
 public class MoveFlyingShark : MonoBehaviour
 {
-
     public float sharkSpeed;
     private bool move = true;
     public static int ranStart = 0;
     public static bool Player1Shark = false;
 
 
-
     void Start()
     {
         ranStart = Random.Range(0, 2);
         if (ranStart == 0)
+        {
             Player1Shark = true;
+            MainUI.I.SetLeftCharacter(MainUI.CharacterState.SHARK);
+            MainUI.I.SetRightCharacter(MainUI.CharacterState.MUNCHPIPE);
+        }
         else
+        {
             Player1Shark = false;
+            MainUI.I.SetLeftCharacter(MainUI.CharacterState.MUNCHPIPE);
+            MainUI.I.SetRightCharacter(MainUI.CharacterState.SHARK);
+        }
 
+        if (MainUI.I)
+            MainUI.I.SetCountDown(5, SharkWin);
     }
 
+    public void SharkWin()
+    {
+        //nextgame
+        if (MoveFlyingShark.Player1Shark)
+        {
+            MainUI.I.AddLeftPlayerScore();
+            WinDialog.I.SetImageState(WinDialog.ImageState.LEFT);
+            StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+        }
+        else
+        {
+            MainUI.I.AddRightPlayerScore();
+            WinDialog.I.SetImageState(WinDialog.ImageState.RIGHT);
+            StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -80,11 +104,13 @@ public class MoveFlyingShark : MonoBehaviour
             if (Player1Shark)
             {
                 MainUI.I.AddRightPlayerScore();
+                WinDialog.I.SetImageState(WinDialog.ImageState.RIGHT);
                 StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
             }
             else
             {
                 MainUI.I.AddLeftPlayerScore();
+                WinDialog.I.SetImageState(WinDialog.ImageState.LEFT);
                 StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
             }
         }
