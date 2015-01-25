@@ -22,12 +22,14 @@ public class SceneManager : MonoBehaviour
 
     private int GetNumber()
     {
-        int value = LevelIndices[Random.Range(0, LevelIndices.Length)];
+        /*int value = LevelIndices[Random.Range(0, LevelIndices.Length)];
         if (value == lastLevel)
             value = GetNumber();
-
+        */
         //Debug.LogWarning("GetNumber: " + value);
-        lastLevel = value;
+        int value = lastLevel + 1;
+        if (value > 5)
+            value = 2;
         return value;
     }
 
