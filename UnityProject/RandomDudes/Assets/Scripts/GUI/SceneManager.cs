@@ -14,7 +14,7 @@ public class SceneManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        Debug.LogWarning("lastLevel: " + lastLevel);
+        //.LogWarning("lastLevel: " + lastLevel);
         int value = GetNumber();
         lastLevel = value;
         Application.LoadLevel(value);        
@@ -26,7 +26,7 @@ public class SceneManager : MonoBehaviour
         if (value == lastLevel)
             value = GetNumber();
 
-        Debug.LogWarning("GetNumber: " + value);
+        //Debug.LogWarning("GetNumber: " + value);
         return value;
     }
 

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 namespace SharkJumper
 {
@@ -8,8 +9,10 @@ namespace SharkJumper
 [System.Serializable()]
 public class PlayerSettings
 {
-    public List<Sprite> JumpUpSprites = new List<Sprite>();
-    public List<Sprite> FallDownSprites = new List<Sprite>();
+    public List<Sprite> JumpUpLeftSprites = new List<Sprite>();
+    public List<Sprite> JumpUpRightSprites = new List<Sprite>();
+    public List<Sprite> FallDownLeftSprites = new List<Sprite>();
+    public List<Sprite> FallDownRightSprites = new List<Sprite>();
     public Sprite ApexSprite;
 
     public Sprite DefaultSprite;
@@ -149,15 +152,23 @@ public class LevelSettings
     }
 }
 
-public class SharkJump : MonoBehaviour {
-
+public class SharkJump : MonoBehaviour 
+{
     public int PlayerCount = 0;
 
+    public static SharkJump I;
     public PlayerSettings playerSettings = new PlayerSettings();
     public CameraSettings cameraSettings = new CameraSettings();
     public LevelSettings levelSettings = new LevelSettings();
 
     public static  List<PlayerProxy> players = new List<PlayerProxy>();
+
+    void Awake()
+    {
+        I = this;
+        //Load GUI
+        Application.LoadLevelAdditive(1);
+    }
 
     void Start()
     {
@@ -166,12 +177,17 @@ public class SharkJump : MonoBehaviour {
         playerSettings.Initialize();
         levelSettings.Initialize(this);
         cameraSettings.Initialize(this);
+
         for (int i = 0, iMax = PlayerCount; i < iMax; i++)
         {
             PlayerProxy tempPlayer = new PlayerProxy();
             players.Add(tempPlayer);
             tempPlayer.Initialize(this, i);
         }
+
+        //Set Gui
+        MainUI.I.SetLeftCharacter(MainUI.CharacterState.DUDE);
+        MainUI.I.SetRightCharacter(MainUI.CharacterState.DUDE);
     }
 
 
@@ -186,7 +202,12 @@ public class SharkJump : MonoBehaviour {
         cameraSettings.Update();
     }
 
+    public IEnumerator Wait(int p, UnityAction action)
+    {
+        yield return new WaitForSeconds(p);
 
+        action();
+    }
 }
 
 public class PlayerProxy
@@ -194,8 +215,7 @@ public class PlayerProxy
     private SpriteRenderer _sprite;
     private Collider2D _collider;
     private Rigidbody2D _rigid;
-    public Transform _myTransform;
-    
+    public Transform _myTransform;    
 
     private SharkJump Owner;
 
@@ -341,33 +361,73 @@ public class PlayerProxy
         {
             Debug.Log("Player[" + ID + "] Lost this Round");
             Owner.enabled = false;
+
+            if (ID == 0)
+            {
+                MainUI.I.AddRightPlayerScore();
+                WinDialog.I.SetImageState(WinDialog.ImageState.RIGHT);
+            }
+            else
+            {
+                MainUI.I.AddLeftPlayerScore();
+                WinDialog.I.SetImageState(WinDialog.ImageState.LEFT);
+            }
+
+            //SetState(GameState.START);
+            SharkJump.I.StartCoroutine(SharkJump.I.Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
         }
 
         if (_myTransform.position.y >= Owner.cameraSettings.CurrentHighestYPosition)
         {
             Debug.Log("Player[" + ID + "] Won this Round");
             Owner.enabled = false;
+
+            if (ID == 0)
+            {
+                MainUI.I.AddLeftPlayerScore();
+                WinDialog.I.SetImageState(WinDialog.ImageState.LEFT);
+            }
+            else
+            {
+                MainUI.I.AddRightPlayerScore();
+                WinDialog.I.SetImageState(WinDialog.ImageState.RIGHT);
+            }
+
+
+            
+            //SetState(GameState.START);
+            SharkJump.I.StartCoroutine(SharkJump.I.Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
         }
         AnimationUpdate();
     }
+        
 
     private void AnimationUpdate()
     {
         //Debug.Log( Grounded.ToString());
         if(Grounded)
         {
-            _sprite.sprite = Owner.playerSettings.DefaultSprite;
+            if (ID == 0)
+                _sprite.sprite = Owner.playerSettings.DefaultSprite;
+            else
+                _sprite.sprite = Owner.playerSettings.ApexSprite;            
             return;
         }
        
 
         if (_rigid.velocity.y > Owner.playerSettings.VelocityUpThresholdForJumpUpAnim)
         {
-            _sprite.sprite = Owner.playerSettings.JumpUpSprites[0];
+            if(ID == 0)
+                _sprite.sprite = Owner.playerSettings.JumpUpLeftSprites[0];
+            else
+                _sprite.sprite = Owner.playerSettings.JumpUpRightSprites[0];
         }
         else if (_rigid.velocity.y < Owner.playerSettings.VelocityDownThresholdForFallAnim)
         {
-            _sprite.sprite = Owner.playerSettings.FallDownSprites[0];
+            if (ID == 0)
+                _sprite.sprite = Owner.playerSettings.FallDownLeftSprites[0];
+            else
+                _sprite.sprite = Owner.playerSettings.FallDownRightSprites[0];
         }
         else
         {

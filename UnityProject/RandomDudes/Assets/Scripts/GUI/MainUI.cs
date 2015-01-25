@@ -6,6 +6,7 @@
  */ 
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.Events;
 
 public class MainUI : MonoBehaviour 
 {
@@ -20,9 +21,13 @@ public class MainUI : MonoBehaviour
     public static int RightPlayerScore = 0;
     public Text LeftScoreText;
     public Text RightScoreText;
+    public Text CountDownText;
     //public Image scorePrefab;
     public Sprite[] leftCharacter;
     public Sprite[] rightCharacter;
+
+    
+
     public enum CharacterState
     {
         DUDE,
@@ -37,6 +42,26 @@ public class MainUI : MonoBehaviour
         UpdateScoreText();
     }
 
+    public void SetCountDown(int time, UnityAction action)
+    {
+        StartCoroutine(UpdateCounter(time, action));
+        //StartCoroutine(FlashingText(time, action));
+    }
+    
+    IEnumerator UpdateCounter(int time, UnityAction action)
+    {
+        CountDownText.gameObject.SetActive(true);
+        for (int i = time; i == 0; i--)
+        {
+            CountDownText.text = i.ToString();
+            yield return new WaitForSeconds(1);
+        }
+
+        yield return new WaitForSeconds(1);
+        CountDownText.gameObject.SetActive(false);
+
+        action();
+    }
 
     void Update()
     {
@@ -71,7 +96,7 @@ public class MainUI : MonoBehaviour
     }
 
     public void SetRightCharacter(CharacterState charState)
-    {
+    {        
         RightPlayerCharacter = charState;
 
         switch (RightPlayerCharacter)
