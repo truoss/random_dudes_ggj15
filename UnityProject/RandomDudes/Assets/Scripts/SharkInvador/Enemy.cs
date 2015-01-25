@@ -32,7 +32,7 @@ namespace SharkInvador
         public Texture Banana2;
         public Texture Banana3;
         private int selection;
-        private int count = 0;
+        //private int count = 0;
         #endregion
 
 

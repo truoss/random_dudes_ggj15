@@ -27,7 +27,8 @@ public class MainUI : MonoBehaviour
     {
         DUDE,
         SHARK,
-        BANANA
+        BANANA,
+        MUNCHPIPE
     }
 
     void Awake()
@@ -61,6 +62,9 @@ public class MainUI : MonoBehaviour
             case CharacterState.BANANA:
                 LeftPlayerImg.sprite = leftCharacter[2];
                 break;
+            case CharacterState.MUNCHPIPE:
+                LeftPlayerImg.sprite = rightCharacter[3];
+                break;
             default:
                 break;
         }
@@ -80,6 +84,9 @@ public class MainUI : MonoBehaviour
                 break;
             case CharacterState.BANANA:
                 RightPlayerImg.sprite = rightCharacter[2];
+                break;
+            case CharacterState.MUNCHPIPE:
+                RightPlayerImg.sprite = rightCharacter[3];
                 break;
             default:
                 break;

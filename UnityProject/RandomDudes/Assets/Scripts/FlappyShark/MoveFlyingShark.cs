@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-
 using System.Collections;
+using UnityEngine.Events;
 
 
 
@@ -43,7 +43,17 @@ public class MoveFlyingShark : MonoBehaviour
     {
         Debug.Log("Hit PIpe");
         move = false;
+        //next game
 
+        MainUI.I.AddRightPlayerScore();
+        StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
+    }
+
+    public IEnumerator Wait(int p, UnityAction action)
+    {
+        yield return new WaitForSeconds(p);
+
+        action();
     }
 }
 

@@ -20,7 +20,7 @@ namespace SharkPac
         {
             I = this;
             
-            Application.LoadLevelAdditive(2);
+            Application.LoadLevelAdditive(1);
         }
 
         void Start()
@@ -58,13 +58,13 @@ namespace SharkPac
                     MainUI.I.AddRightPlayerScore();
                     WinDialog.I.SetImageState(WinDialog.ImageState.RIGHT);
                     //SetState(GameState.START);
-                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadVulcano));
+                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
                     break;
                 case GameState.PLAYER1WINS:
                     MainUI.I.AddLeftPlayerScore();
                     WinDialog.I.SetImageState(WinDialog.ImageState.LEFT);
                     //SetState(GameState.START);
-                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadVulcano));
+                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
                     break;
                 default:
                     break;

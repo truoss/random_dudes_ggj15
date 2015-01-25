@@ -68,7 +68,7 @@ TextureImporter:
   textureFormat: -3
   maxTextureSize: 4096
   textureSettings:
-    filterMode: -1
+    filterMode: 1
     aniso: 16
     mipBias: -1
     wrapMode: 1
@@ -91,8 +91,8 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 1012
+        y: 512
+        width: 1000
         height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -100,9 +100,9 @@ TextureImporter:
     - name: flappyshark_sheet_1
       rect:
         serializedVersion: 2
-        x: 1012
-        y: 0
-        width: 1012
+        x: 1000
+        y: 512
+        width: 1000
         height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -110,9 +110,9 @@ TextureImporter:
     - name: flappyshark_sheet_2
       rect:
         serializedVersion: 2
-        x: 2024
-        y: 0
-        width: 1012
+        x: 2000
+        y: 512
+        width: 1000
         height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -120,9 +120,29 @@ TextureImporter:
     - name: flappyshark_sheet_3
       rect:
         serializedVersion: 2
-        x: 3036
+        x: 0
         y: 0
-        width: 1012
+        width: 1000
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: flappyshark_sheet_4
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 0
+        width: 1000
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: flappyshark_sheet_5
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 0
+        width: 1000
         height: 512
       alignment: 0
       pivot: {x: 0, y: 0}

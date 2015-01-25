@@ -21,7 +21,7 @@ namespace SharkVulcano
         {
             I = this;
 
-            Application.LoadLevelAdditive(2);
+            Application.LoadLevelAdditive(1);
         }
 
         void Start()
@@ -50,13 +50,13 @@ namespace SharkVulcano
                     MainUI.I.AddLeftPlayerScore();
                     WinDialog.I.SetImageState(WinDialog.ImageState.LEFT);
                     //SetState(GameState.START);
-                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadPac));
+                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
                     break;
                 case GameState.RIGHTWINS:
                     MainUI.I.AddRightPlayerScore();
                     WinDialog.I.SetImageState(WinDialog.ImageState.RIGHT);
                     //SetState(GameState.START);
-                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadPac));
+                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
                     break;
                 default:
                     break;

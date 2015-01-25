@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
 
 public class MoveMunchPipe : MonoBehaviour {
 
@@ -41,6 +42,8 @@ public class MoveMunchPipe : MonoBehaviour {
         if (time < 0 && first)
         {
             //nextgame
+            MainUI.I.AddLeftPlayerScore();
+            StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
         }
 
         float amtToMoveV = 0;
@@ -57,5 +60,12 @@ public class MoveMunchPipe : MonoBehaviour {
                 transform.position = new Vector3(transform.position.x, -3.5f, transform.position.z);
         }
 
+    }
+
+    public IEnumerator Wait(int p, UnityAction action)
+    {
+        yield return new WaitForSeconds(p);
+
+        action();
     }
 }

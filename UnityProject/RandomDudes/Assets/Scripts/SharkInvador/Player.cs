@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using SharkInvador;
 using System.Collections;
+using UnityEngine.Events;
 
 
 namespace SharkInvador
@@ -55,11 +56,7 @@ namespace SharkInvador
         };
 
         private State state = State.Playing;        //sets the state at the beginning
-
-
-
-
-
+        
 
         //coroutine for the Destroy ship
         IEnumerator DestroyShip()
@@ -105,19 +102,26 @@ namespace SharkInvador
             else
             {
                 if (gameObject.tag == "Player")
-                {
-                    //Player 2 Wins
+                {                    
+                    MainUI.I.AddLeftPlayerScore();
+                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
                 }
                 if (gameObject.tag == "Player2")
                 {
-                    //Player 1 Wins
+                    MainUI.I.AddRightPlayerScore();
+                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
                 }
             }
 
         }
 
 
+        public IEnumerator Wait(int p, UnityAction action)
+        {
+            yield return new WaitForSeconds(p);
 
+            action();
+        }
 
 
 
@@ -150,7 +154,11 @@ namespace SharkInvador
                 {
                     lives = 0;
                     lives2 = 0;
-                    StartCoroutine("DestroyShip");
+                    //StartCoroutine("DestroyShip");
+                    //next game
+                    MainUI.I.AddRightPlayerScore();
+                    MainUI.I.AddLeftPlayerScore();
+                    StartCoroutine(Wait(3, (UnityAction)SceneManager.I.LoadNextLevel));
                 }
 
                 float amtToMoveV = 0;
@@ -264,7 +272,7 @@ namespace SharkInvador
 
 
 
-
+#if UNITY_EDITOR
         //GUI funktion
         void OnGUI()
         {
@@ -308,7 +316,7 @@ namespace SharkInvador
             //display current number of missed enemys
             //GUI.Label(new Rect(10, 70, 120, 20), "Klicks: " + klicks.ToString());
         }
-
+#endif
 
 
 
@@ -417,7 +425,7 @@ namespace SharkInvador
 
                 if (Input.GetAxis("Fire1") > 0 && ammoP1 > 0 && fire1Time > 0.5)
                 {
-                    Debug.Log(Input.GetAxis("Fire1"));
+                    Debug.LogWarning("Fire1: " + Input.GetAxis("Fire1"), this);
                     //determine position
                     Vector3 position = new Vector3(transform.position.x, transform.position.y + projectileOffset, transform.position.z);
                     //fire projectile
@@ -434,7 +442,7 @@ namespace SharkInvador
 
                 if (Input.GetAxis("Fire2") > 0 && ammoP2 > 0 && fire2Time > 0.5)
                 {
-                    Debug.Log(Input.GetAxis("Fire2"));
+                    Debug.LogWarning("Fire2: " + Input.GetAxis("Fire2"), this);
                     //determine position
                     Vector3 position = new Vector3(transform.position.x, transform.position.y + projectileOffset, transform.position.z);
                     //fire projectile
