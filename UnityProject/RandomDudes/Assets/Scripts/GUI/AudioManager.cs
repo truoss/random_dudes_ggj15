@@ -4,29 +4,24 @@ using System.Collections;
 public class AudioManager : MonoBehaviour {
 
 
-   /*
-    private int ranMusic;
+    public AudioClip audio1;
+    public AudioClip audio2;
+    private int ranStart;
 
-	// Use this for initialization
-	void Start () 
+    void Awake()
     {
-        var tCom = gameObject.GetComponents<AudioSource>;
-    for (int i = 0; i < tCom.length; i++) 
-    {
-        if (tCom[i].clip.name == "steel roll track")
-            incidentBallTrackSnd = tCom[i];
-        if (tCom[i].clip.name == "steel hits floor")
-            incidentHitsFloorSnd = tCom[i];
+        //AudioSource audio11 = (AudioSource)audio1;
+        ranStart = Random.Range(0, 2);
 
-	    ranMusic = Random.Range(0, 2);
-        if (ranMusic == 0)
-            Instantiate(Back1);
+        if (ranStart == 0)
+        {
+            audio.clip = audio1;
+            audio.Play();
+        }
         else
-            Instantiate(Back2);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	*/
-	//}
+        {
+            audio.clip = audio2;
+            audio.Play();
+        }
+    }
 }

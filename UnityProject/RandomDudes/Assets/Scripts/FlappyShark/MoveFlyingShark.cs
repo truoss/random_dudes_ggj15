@@ -29,7 +29,7 @@ public class MoveFlyingShark : MonoBehaviour
         }
 
         if (MainUI.I)
-            MainUI.I.SetCountDown(5, SharkWin);
+            MainUI.I.SetCountDown(30, SharkWin);
     }
 
     public void SharkWin()
