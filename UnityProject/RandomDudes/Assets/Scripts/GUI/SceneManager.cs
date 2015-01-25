@@ -27,6 +27,7 @@ public class SceneManager : MonoBehaviour
             value = GetNumber();
 
         //Debug.LogWarning("GetNumber: " + value);
+        lastLevel = value;
         return value;
     }
 
