@@ -40,7 +40,7 @@ public class MoveFlyingShark : MonoBehaviour
 
     ////when player hits pipe
     void OnTriggerEnter(Collider otherObject)
-    {
+    {        
         Debug.Log("Hit PIpe");
         move = false;
         //next game

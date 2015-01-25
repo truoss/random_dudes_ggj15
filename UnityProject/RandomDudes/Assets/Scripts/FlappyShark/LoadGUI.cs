@@ -13,7 +13,7 @@ namespace FlappyShark
         void Start()
         {
             MainUI.I.SetLeftCharacter(MainUI.CharacterState.SHARK);
-            MainUI.I.SetRightCharacter(MainUI.CharacterState.MUNCHPIPE);
+            MainUI.I.SetRightCharacter(MainUI.CharacterState.MUNCHPIPE);            
         }
     }
 }

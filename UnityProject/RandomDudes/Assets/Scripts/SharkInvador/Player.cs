@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using SharkInvador;
 using System.Collections;
 using UnityEngine.Events;
 
@@ -415,17 +414,15 @@ namespace SharkInvador
                     weapon = 4;
             }*/
 
-
-
-
+            
             //Player 1
             if (gameObject.tag == "Player")
             {
                 // moves the player horizontaly
 
-                if (Input.GetAxis("Fire1") > 0 && ammoP1 > 0 && fire1Time > 0.5)
+                if (Input.GetButtonDown("Fire1") && ammoP1 > 0 && fire1Time > 0.5)
                 {
-                    Debug.LogWarning("Fire1: " + Input.GetAxis("Fire1"), this);
+                    //Debug.LogWarning("Fire1: " + Input.GetButtonDown("Fire1"), this);
                     //determine position
                     Vector3 position = new Vector3(transform.position.x, transform.position.y + projectileOffset, transform.position.z);
                     //fire projectile
@@ -440,9 +437,9 @@ namespace SharkInvador
             {
                 // moves the player horizontaly
 
-                if (Input.GetAxis("Fire2") > 0 && ammoP2 > 0 && fire2Time > 0.5)
+                if (Input.GetButtonDown("Fire2") && ammoP2 > 0 && fire2Time > 0.5)
                 {
-                    Debug.LogWarning("Fire2: " + Input.GetAxis("Fire2"), this);
+                    //Debug.LogWarning("Fire2: " + Input.GetButtonDown("Fire2"), this);
                     //determine position
                     Vector3 position = new Vector3(transform.position.x, transform.position.y + projectileOffset, transform.position.z);
                     //fire projectile
