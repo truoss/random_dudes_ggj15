@@ -36,8 +36,8 @@ namespace SharkInvador
         //public static int score = 0;                //score of the player
         //public static int scoreAmmo = 0;            //score of the player
         public static bool receivedAmmo = false;    //if ammo was received
-        public static int lives = 3;                //lives that are still remaining (player 1)
-        public static int lives2 = 3;                //lives that are still remaining (player 2)
+        public static int lives = 1;                //lives that are still remaining (player 1)
+        public static int lives2 = 1;                //lives that are still remaining (player 2)
 
         //public static int klicks = 0;               //number of times shot (for debug)
 
@@ -290,8 +290,8 @@ namespace SharkInvador
             time = 60;
             ammoP1 = 5;
             ammoP2 = 5;
-            lives = 3;
-            lives2 = 3;
+            lives = 1;
+            lives2 = 1;
             receivedAmmo = false;
             first = true;
             second = true;

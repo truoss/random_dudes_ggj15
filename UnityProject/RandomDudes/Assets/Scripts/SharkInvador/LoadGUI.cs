@@ -7,7 +7,7 @@ namespace SharkInvador
     {
         void Awake()
         {
-            Application.LoadLevelAdditive(1);
+            //Application.LoadLevelAdditive(1);
         }
 
         void Start()
