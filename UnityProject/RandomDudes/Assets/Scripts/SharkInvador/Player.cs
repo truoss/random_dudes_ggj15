@@ -296,6 +296,10 @@ namespace SharkInvador
             first = true;
             second = true;
             state = State.Playing;
+            Enemy.minSideways = -0.03f;
+            Enemy.maxSideways = 0.03f;
+            Enemy.minSpeed = 1;
+            Enemy.maxSpeed = 2;
             GameLogic.curState = GameLogic.GameState.PLAYING;
 
             if (MainUI.I)

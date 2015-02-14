@@ -10,11 +10,11 @@ namespace SharkInvador
 
         #region Fields
         public float currentSpeed;              //the current speed of enemy
-        public float minSpeed;                  //the minimum speed of enemy
-        public float maxSpeed;                  //the maximum speed of enemy
+        public static float minSpeed = 1;                  //the minimum speed of enemy
+        public static float maxSpeed = 2;                  //the maximum speed of enemy
         private float x, y, z;                  //coordinates of random new position
-        private float minSideways = -0.05f;                 //variable for the sideways direction of enemy
-        private float maxSideways = 0.05f;                 //variable for the sideways direction of enemy
+        public static float minSideways = -0.03f;                 //variable for the sideways direction of enemy
+        public static float maxSideways = 0.03f;                 //variable for the sideways direction of enemy
         private float sideways;                 //variable for the sideways direction of enemy
         private float rotationX;                //random for the x axis rotation
         private float rotationY;                //random for the y axis rotation
@@ -122,8 +122,8 @@ namespace SharkInvador
 
 
             // to move the enemy into different directions
-            minSideways -= 0.01f;
-            maxSideways += 0.01f;
+            minSideways -= 0.005f;
+            maxSideways += 0.005f;
             sideways = Random.Range(minSideways, maxSideways);
             //set new speed
             minSpeed += 0.05f;
